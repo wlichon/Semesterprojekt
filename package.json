@@ -18,9 +18,11 @@
   },
   "homepage": "https://github.com/zerleger/Semesterprojekt#readme",
   "devDependencies": {
+    "@types/jquery": "^3.5.14",
     "lite-server": "^2.6.1"
   },
   "dependencies": {
+    "@types/jqueryui": "^1.12.16",
     "bootstrap-icons": "^1.8.1"
   }
 }

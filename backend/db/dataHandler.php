@@ -1,5 +1,5 @@
 <?php
-include("./models/person.php");
+include("./models/appointment.php");
 class DataHandler
 {
     public function queryPersons()
@@ -33,10 +33,10 @@ class DataHandler
     private static function getDemoData()
     {
         $demodata = [
-            [new Person(1, "Jane", "Doe", "jane.doe@fhtw.at", 1234567, "Central IT")],
-            [new Person(2, "John", "Doe", "john.doe@fhtw.at", 34345654, "Help Desk")],
-            [new Person(3, "baby", "Doe", "baby.doe@fhtw.at", 54545455, "Management")],
-            [new Person(4, "Mike", "Smith", "mike.smith@fhtw.at", 343477778, "Faculty")],
+            [new Appointment(22,"Mar",1140,"Name","comment")],
+            [new Appointment(22,"Mar",1140,"Name","comment")],
+            [new Appointment(22,"Mar",1140,"Name","comment")],
+            [new Appointment(22,"Mar",1140,"Name","comment")]
         ];
         return $demodata;
     }

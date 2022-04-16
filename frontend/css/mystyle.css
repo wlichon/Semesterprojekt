@@ -6,11 +6,6 @@
     background-color:rgb(228, 242, 217);
 }
 
-html, body {
-    margin: 0;
-    height: 100%;
-}
-
 .bi-person-circle{
     font-size: 1.5rem;
 }
@@ -31,4 +26,17 @@ body{
 
 .container{
     border-radius: 5px;
+}
+
+#lslide{
+    background-color:blue;
+    border-radius:10px;
+}
+
+.event{
+    cursor: pointer;
+}
+
+.event:hover{
+    background-color:blue;
 }
