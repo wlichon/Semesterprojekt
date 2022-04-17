@@ -1,14 +1,18 @@
 <?php
-include("businesslogic/simpleLogic.php");
+include("businessLogic/logic.php");
 
 $param = "";
 $method = "";
 
+$method = "loadAppointments";
+
 isset($_GET["method"]) ? $method = $_GET["method"] : false;
 isset($_GET["param"]) ? $param = $_GET["param"] : false;
 
-$logic = new SimpleLogic();
+$logic = new Logic();
 $result = $logic->handleRequest($method, $param);
+
+
 if ($result == null) {
     response("GET", 400, null);
 } else {
@@ -17,11 +21,12 @@ if ($result == null) {
 
 function response($method, $httpStatus, $data)
 {
-    header('Content-Type: application/json');
+    header('Content-type: application/json');
     switch ($method) {
         case "GET":
             http_response_code($httpStatus);
-            echo (json_encode($data));
+            echo json_encode($data);
+            
             break;
         default:
             http_response_code(405);
