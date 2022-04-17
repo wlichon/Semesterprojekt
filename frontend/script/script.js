@@ -6,7 +6,7 @@ $(function () {
             url: "/backend/serviceHandler.php",
             cache: false,
             data: { method: "loadAppointments" },
-            dataType: "text",
+            dataType: "json",
             success: function (response) {
                 console.log("success");
                 //console.log(response);
@@ -28,24 +28,3 @@ $(function () {
         $("#events").show("slide", 1000);
     }); });
 });
-function loaddata() {
-    $.ajax({
-        type: "GET",
-        url: "/backend/serviceHandler.php",
-        cache: false,
-        //data: {method: "loadAppointments"},
-        dataType: "json",
-        success: function (response) {
-            console.log("success");
-            console.log(response);
-            /*
-            $.each(response, (i,val) => {
-                $("#list").append("<li class='list-group-item' data-price=" + val["price"] + "><b>" + val["name"] + "</b> for € <i>" + val["price"] + "</i></li>")
-            })
-            */
-        },
-        error: function (e) {
-            console.log("failure");
-        }
-    });
-}

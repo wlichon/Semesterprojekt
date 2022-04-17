@@ -6,7 +6,7 @@ $(function() {
             url: "/backend/serviceHandler.php",
             cache: false,
             data: {method: "loadAppointments"},
-            dataType: "json",
+            dataType: "text",
             success: function (response) {
                 console.log("success");
                 //console.log(response);
