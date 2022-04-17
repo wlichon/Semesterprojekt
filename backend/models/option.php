@@ -18,4 +18,4 @@ class Option {
 
 //$a = new Option("23","02","1999","Meeting");
 
-//echo date_format($a->date,"Y-m-d");
+//echo date_format($a->date,"M");

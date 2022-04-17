@@ -18,12 +18,6 @@ class Logic
             case "queryAppointments":
                 $res = $this->dh->queryAppointments();
                 break;
-            case "queryPersonById":
-                $res = $this->dh->queryPersonById($param);
-                break;
-            case "queryPersonByName":
-                $res = $this->dh->queryPersonByName($param);
-                break;
             default:
                 $res = null;
                 break;

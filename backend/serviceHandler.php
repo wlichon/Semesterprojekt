@@ -25,7 +25,7 @@ function response($method, $httpStatus, $data)
     switch ($method) {
         case "GET":
             http_response_code($httpStatus);
-            echo json_encode($data);
+            echo (json_encode($data));
             break;
         default:
             http_response_code(405);
