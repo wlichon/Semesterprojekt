@@ -6,10 +6,12 @@ class Option {
     public $voteCount;
     public $date;
     public $timerange;
+    public $id;
 
-    function __construct($day,$month,$year) {
-        $this->date = date_create($year."-".$month."-".$day);
+    function __construct($date,$id) {
+        $this->date = date_create($date);
         $this->voteCount = 0;
+        $this->id = $id;
 
       }
 }

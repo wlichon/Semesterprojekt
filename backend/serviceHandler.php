@@ -4,8 +4,6 @@ include("businessLogic/logic.php");
 $param = "";
 $method = "";
 
-$method = "loadAppointments";
-
 isset($_GET["method"]) ? $method = $_GET["method"] : false;
 isset($_GET["param"]) ? $param = $_GET["param"] : false;
 

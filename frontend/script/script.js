@@ -22,8 +22,7 @@ $(function () {
                 var expiration = val["votingExpirationDate"]["date"].substr(0, 19);
                 var begin = val["begin"]["date"].substr(11).substr(0, 8);
                 var end = val["end"]["date"].substr(11).substr(0, 8);
-                //console.log(expiration);
-                $("#events").append("<div class='col-md-2 event'>" +
+                $("#events").append("<div class='col-md-2 event' data=" + i + ">" +
                     "<div class='col wrapper'>" +
                     "<h2>" + val["title"] + "</h2>" +
                     "<h4>" + month + "</h4>" +
@@ -37,6 +36,25 @@ $(function () {
             });
         },
         complete: function () {
+            $(".event").on('click', function (e) {
+                var self = e.currentTarget;
+                $("#events").hide("slide", { direction: "left" }, 1000, function () {
+                    console.log(self.getAttribute("data"));
+                    $("#appointments").show("slide", 1000);
+                });
+                /*
+                $.ajax({
+                    type: "GET",
+                    url: "backend/serviceHandler.php",
+                    cache: false,
+                    data: {method: "loadOptions"},
+                    dataType: "json",
+                    success: function (response) {
+                        
+                    }
+                }),
+                */
+            });
             $("#events").show("slide", 1000);
         },
         error: function (e) {
@@ -47,9 +65,6 @@ $(function () {
     $("#submit").on('click', function () {
         console.log($("#test").prop("checked"));
     });
-    $("#events").on('click', function () { return $("#events").hide("slide", { direction: "left" }, 1000, function () {
-        $("#appointments").show("slide", 1000);
-    }); });
     $("#appointments").on('click', function () { return $("#appointments").hide("slide", { direction: "left" }, 1000, function () {
         $("#events").show("slide", 1000);
     }); });

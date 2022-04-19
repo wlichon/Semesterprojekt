@@ -4,16 +4,22 @@ class Appointment {
     public $votingExpirationDate;
     public $begin;
     public $end;
+    public $options;
+    public $date;
+    public $optionIDs;
 
-    function __construct($day,$month,$year,$title,$votingExpirationDate,$begin,$end) {
-        $this->date = date_create($year."-".$month."-".$day);
+    function __construct($date,$title,$votingExpirationDate,$begin,$end,$optionIDs) {
+        $this->date = date_create($date);
         $this->title = $title;
         $this->votingExpirationDate = date_create($votingExpirationDate);
         $this->begin = date_create($begin);
         $this->end = date_create($end);
+        $this->optionsIDs = $optionIDs;
       }
 }
 
-//$a = new Appointment("22","03","1234","MEETING","2013-03-15 23:40:00","12:00","13:00");
+//$a = new Appointment("22-02-1234","MEETING","2013-03-15 23:40:00","12:00","13:00",Option["2013-03-15","2013-03-15","2013-03-14"]);
 
-//echo date_format($a->end,"c");;
+
+
+//echo date_format($a->date,"c");;
