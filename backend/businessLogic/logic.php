@@ -9,15 +9,19 @@ class Logic
         $this->dh = new DataHandler();
     }
 
-    function handleRequest($method, $param)
+    function handleRequest($function,$param)
     {
-        switch ($method) {
+        switch ($function) {
             case "loadAppointments":
                 $res = $this->dh->loadAppointments();
                 break;
             case "queryAppointments":
                 $res = $this->dh->queryAppointments();
                 break;
+            case "loadOptions":
+                $res = $this->dh->loadOptions($param);
+                break;
+                
             default:
                 $res = null;
                 break;

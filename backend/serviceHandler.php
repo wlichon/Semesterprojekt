@@ -2,13 +2,15 @@
 include("businessLogic/logic.php");
 
 $param = "";
-$method = "";
+$function = "";
 
-isset($_GET["method"]) ? $method = $_GET["method"] : false;
+isset($_GET["function"]) ? $function = $_GET["function"] : false;
 isset($_GET["param"]) ? $param = $_GET["param"] : false;
 
+//echo (json_encode($param[0]));
+
 $logic = new Logic();
-$result = $logic->handleRequest($method, $param);
+$result = $logic->handleRequest($function,$param);
 
 
 if ($result == null) {
@@ -17,10 +19,10 @@ if ($result == null) {
     response("GET", 200, $result);
 }
 
-function response($method, $httpStatus, $data)
+function response($function, $httpStatus, $data)
 {
     header('Content-type: application/json');
-    switch ($method) {
+    switch ($function) {
         case "GET":
             http_response_code($httpStatus);
             echo (json_encode($data));

@@ -4,7 +4,6 @@ class Appointment {
     public $votingExpirationDate;
     public $begin;
     public $end;
-    public $options;
     public $date;
     public $optionIDs;
 
@@ -14,7 +13,7 @@ class Appointment {
         $this->votingExpirationDate = date_create($votingExpirationDate);
         $this->begin = date_create($begin);
         $this->end = date_create($end);
-        $this->optionsIDs = $optionIDs;
+        $this->optionIDs = $optionIDs;
       }
 }
 
