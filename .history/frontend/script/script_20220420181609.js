@@ -8,7 +8,7 @@ $(function () {
     $("#events").hide();
     $.ajax({
         type: "GET",
-        url: "backend/serviceHandler.php",              // geh zum ServiceHandler -> Funktion Parameter werden überprüft -> 
+        url: "backend/serviceHandler.php",
         cache: false,
         data: { function: "loadAppointments" },         // kein Parameter nötig, da alle Meetings geladen werden
         dataType: "json",

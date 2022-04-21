@@ -5,7 +5,7 @@ class DataHandler
 {
     public function queryAppointments()
     {
-        $res =  $this->getDemoAppointments();       // retourniert array von DemoAppointments
+        $res =  $this->getDemoAppointments();
         return $res;
     }
 

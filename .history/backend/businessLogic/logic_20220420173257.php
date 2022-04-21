@@ -6,10 +6,10 @@ class Logic
     private $dh;
     function __construct()
     {
-        $this->dh = new DataHandler();          // erstelle neuen DataHandler (Klasse mit den ganzen Funktionen)
+        $this->dh = new DataHandler();
     }
 
-    function handleRequest($function, $param)
+    function handleRequest($function,$param)
     {
         switch ($function) {
             case "loadAppointments":
@@ -21,7 +21,7 @@ class Logic
             case "loadOptions":
                 $res = $this->dh->loadOptions($param);
                 break;
-
+                
             default:
                 $res = null;
                 break;

@@ -8,7 +8,7 @@ $(function () {
     $("#events").hide();
     $.ajax({
         type: "GET",
-        url: "backend/serviceHandler.php",              // geh zum ServiceHandler -> Funktion Parameter werden überprüft -> 
+        url: "backend/serviceHandler.php",
         cache: false,
         data: { function: "loadAppointments" },         // kein Parameter nötig, da alle Meetings geladen werden
         dataType: "json",
@@ -49,7 +49,7 @@ $(function () {
                         type: "GET",
                         url: "backend/serviceHandler.php",
                         cache: false,
-                        data: { function: "loadOptions", param: optionIDs },    // für die Funktion loadOptions brauchen wir die jeweilige ID des Meetings das wir zuvor angeklickt haben
+                        data: { function: "loadOptions", param: optionIDs },    // für die Funktion loadOptions brauchen wir die jeweilige ID des Meetings das wir ausgewählt haben
                         dataType: "json",
                         success: function (response) {
                             console.log("success");

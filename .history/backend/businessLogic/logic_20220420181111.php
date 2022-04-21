@@ -6,7 +6,7 @@ class Logic
     private $dh;
     function __construct()
     {
-        $this->dh = new DataHandler();          // erstelle neuen DataHandler (Klasse mit den ganzen Funktionen)
+        $this->dh = new DataHandler();          // erstelle neuen DataHandler (das Ding mit den ganzen Funktionen)
     }
 
     function handleRequest($function, $param)

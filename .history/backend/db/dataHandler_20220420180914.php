@@ -5,20 +5,20 @@ class DataHandler
 {
     public function queryAppointments()
     {
-        $res =  $this->getDemoAppointments();       // retourniert array von DemoAppointments
+        $res =  $this->getDemoAppointments();
         return $res;
     }
 
     public function queryOptions()
     {
-        $res =  $this->getDemoOptions();        // retourniert array von den DemoOptions
+        $res =  $this->getDemoOptions();
         return $res;
     }
 
     public function loadAppointments()
     {
         $result = array();
-        foreach ($this->queryAppointments() as $val) {          // lade einfach alle DemoAppointments
+        foreach ($this->queryAppointments() as $val) {          // lade einfach alle values
             array_push($result, $val);
         }
         return $result;
