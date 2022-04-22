@@ -79,38 +79,18 @@
                 </div>
             -->
         </div>
-
-
-        <form id = "createappointmentform" action = "createappointment.php" method = "post">
+        <form id = "createappointmentform">
             <div class="form-group">
-              <label for="date" class ="text-white mt-4 mb-2">Datum</label>
-              <input type="date" class="form-control" name="date" id="date" required>
-            </div>
-            <div class="form-group">
-                <label for="title" class ="text-white mt-4 mb-2">Titel</label>
-                <input type="text" class="form-control" name="title" id="title" placeholder="Meeting Nummer 2" required>
-            </div>
-              <div class="form-group">
-                <label for="votingExpirationDate" class ="text-white mt-4 mb-2">Ablaufdatum und Ablaufuhrzeit für Voting</label>
-                <input type="datetime-local" class="form-control" name="votingExpirationDate" id="votingExpirationDate"  required>
-            </div>
-              <div class="form-group">
-                <label for="begin" class ="text-white mt-4 mb-2">Anfangsuhrzeit</label>
-                <input type="time" class="form-control" name="begin" id="begin" required>
-            </div>
-              <div class="form-group">
-                <label for="end" class ="text-white mt-4 mb-2">Enduhrzeit</label>
-                <input type="time" class="form-control" name="end" id="end"  required>
+                Appointment ($date,$title,$votingExpirationDate,$begin,$end,$optionIDs)3222
+              <label for="exampleInputEmail1" class ="text-white">Datum</label>
+              <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+              <small id="emailHelp" class="form-text text-white">We'll never share your email with anyone else.</small>
             </div>
             <div class="form-group">
-                <label for="terminoption1" class ="text-white mt-4 mb-2">Terminoption 1</label>
-                <input type="time" class="form-control" name="end" id="end"  required>
+              <label for="exampleInputPassword1" class ="text-white">Password</label>
+              <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
             </div>
-            <div class="form-group">
-                <label for="terminoption2" class ="text-white mt-4 mb-2">Terminoption 2</label>
-                <input type="time" class="form-control" name="end" id="end"  required>
-            </div>
-            <button name = "submit" type="submit" class="btn btn-primary mt-3">Submit</button>
+            <button type="submit" class="btn btn-primary mt-3">Submit</button>
           </form>
 
             </div>

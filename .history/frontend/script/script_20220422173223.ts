@@ -7,7 +7,6 @@ const commentbar = "<div class='row mt-5 comment'><div class='input-group input-
 $(function() {
     $("#appointments").hide();
     $("#events").hide();
-    $("#createappointmentform").hide();
 
    $.ajax({
         type: "GET",
@@ -20,7 +19,7 @@ $(function() {
         //  Appointment("25-06-2027", "Meeting4", "22-05-2025 19:30:00", "18:00", "18:30", [2, 3]) also:
         // Appointment("Tag-Monat-Jahr", "MeetingNummer", "ExpirationDate", "UhrzeitBeginn", "Uhrzeitende", "OptionsID");
         // Appointment ($date,$title,$votingExpirationDate,$begin,$end,$optionIDs)3222
-            console.log("success");
+            console.log("success2");
             $.each(response, (i : number,val) => { 
                 let counter = 1;
                 var date = new Date(val["date"]["date"]);
@@ -128,8 +127,6 @@ $(function() {
             console.log("failure");
         }
         
-
-        
         
     });
     
@@ -138,14 +135,6 @@ $(function() {
     $("#submit").on('click', () => {
        console.log($("#test").prop("checked"));
     });
-
-
-    // Create an appointment
-    $("#createappointment").on("click", function() {
-        $("#appointments").hide("slide", 1000);
-        $("#events").hide("slide", 1000);
-        $("#createappointmentform").show("slide", 1000);
-    })
 
 });
 

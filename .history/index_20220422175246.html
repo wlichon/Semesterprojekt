@@ -21,10 +21,10 @@
             <div class="col-md-3 d-flex justify-content-between" style="flex-direction: column">
                 
                 <div class="col">
-                    <h2 class="align-self-center">Appointments</h2>
+                    <h2 class="align-self-center">Appointments2</h2>
                     <p class="">Click a meeting to vote for another date</p>
-                </div>
-                <button class = "btn-primary btn-lg" id = "createappointment"> Click here to create an appointment</button>
+                    <button class = "btn-primary" width = 100% > + </button>
+                        </div>
                   
 
                 </div>
@@ -49,7 +49,6 @@
                
                
                 <!--
-                    <div id = "appointment"
                 <div class="col-md">
                     <div class="row h-80">
                         <div class="col wrapper">
@@ -78,44 +77,12 @@
                     </div>
                 </div>
             -->
-        </div>
-
-
-        <form id = "createappointmentform" action = "createappointment.php" method = "post">
-            <div class="form-group">
-              <label for="date" class ="text-white mt-4 mb-2">Datum</label>
-              <input type="date" class="form-control" name="date" id="date" required>
             </div>
-            <div class="form-group">
-                <label for="title" class ="text-white mt-4 mb-2">Titel</label>
-                <input type="text" class="form-control" name="title" id="title" placeholder="Meeting Nummer 2" required>
-            </div>
-              <div class="form-group">
-                <label for="votingExpirationDate" class ="text-white mt-4 mb-2">Ablaufdatum und Ablaufuhrzeit für Voting</label>
-                <input type="datetime-local" class="form-control" name="votingExpirationDate" id="votingExpirationDate"  required>
-            </div>
-              <div class="form-group">
-                <label for="begin" class ="text-white mt-4 mb-2">Anfangsuhrzeit</label>
-                <input type="time" class="form-control" name="begin" id="begin" required>
-            </div>
-              <div class="form-group">
-                <label for="end" class ="text-white mt-4 mb-2">Enduhrzeit</label>
-                <input type="time" class="form-control" name="end" id="end"  required>
-            </div>
-            <div class="form-group">
-                <label for="terminoption1" class ="text-white mt-4 mb-2">Terminoption 1</label>
-                <input type="time" class="form-control" name="end" id="end"  required>
-            </div>
-            <div class="form-group">
-                <label for="terminoption2" class ="text-white mt-4 mb-2">Terminoption 2</label>
-                <input type="time" class="form-control" name="end" id="end"  required>
-            </div>
-            <button name = "submit" type="submit" class="btn btn-primary mt-3">Submit</button>
-          </form>
 
             </div>
 
             
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 </body>
 </html>

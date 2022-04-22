@@ -7,7 +7,6 @@ const commentbar = "<div class='row mt-5 comment'><div class='input-group input-
 $(function() {
     $("#appointments").hide();
     $("#events").hide();
-    $("#createappointmentform").hide();
 
    $.ajax({
         type: "GET",
@@ -129,7 +128,9 @@ $(function() {
         }
         
 
+        $("#createappointment").on("click", function() {
         
+        })
         
     });
     
@@ -138,14 +139,6 @@ $(function() {
     $("#submit").on('click', () => {
        console.log($("#test").prop("checked"));
     });
-
-
-    // Create an appointment
-    $("#createappointment").on("click", function() {
-        $("#appointments").hide("slide", 1000);
-        $("#events").hide("slide", 1000);
-        $("#createappointmentform").show("slide", 1000);
-    })
 
 });
 

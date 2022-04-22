@@ -7,7 +7,6 @@ const commentbar = "<div class='row mt-5 comment'><div class='input-group input-
 $(function() {
     $("#appointments").hide();
     $("#events").hide();
-    $("#createappointmentform").hide();
 
    $.ajax({
         type: "GET",

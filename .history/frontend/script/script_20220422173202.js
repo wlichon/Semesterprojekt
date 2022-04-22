@@ -6,7 +6,6 @@ var commentbar = "<div class='row mt-5 comment'><div class='input-group input-gr
 $(function () {
     $("#appointments").hide();
     $("#events").hide();
-    $("#createappointmentform").hide();
     $.ajax({
         type: "GET",
         url: "backend/serviceHandler.php",
@@ -107,12 +106,6 @@ $(function () {
     console.log("hi");
     $("#submit").on('click', function () {
         console.log($("#test").prop("checked"));
-    });
-    // Create an appointment
-    $("#createappointment").on("click", function () {
-        $("#appointments").hide("slide", 1000);
-        $("#events").hide("slide", 1000);
-        $("#createappointmentform").show("slide", 1000);
     });
 });
 var optionNameInput = '<div class="col-md d-flex justify-content-between" style="flex-direction: column">' +

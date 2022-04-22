@@ -7,7 +7,6 @@ const commentbar = "<div class='row mt-5 comment'><div class='input-group input-
 $(function() {
     $("#appointments").hide();
     $("#events").hide();
-    $("#createappointmentform").hide();
 
    $.ajax({
         type: "GET",
@@ -78,7 +77,7 @@ $(function() {
                     data: {function: "loadOptions",param: optionIDs},   // für die Funktion loadOptions brauchen wir die jeweilige ID des Meetings das wir zuvor angeklickt haben
                     dataType: "json",
                     success: function (response) {
-                        console.log("success")
+                        console.log("success22")
                         console.log(response);
                         $.each(response, (i,val) =>{
                             
@@ -128,8 +127,6 @@ $(function() {
             console.log("failure");
         }
         
-
-        
         
     });
     
@@ -138,14 +135,6 @@ $(function() {
     $("#submit").on('click', () => {
        console.log($("#test").prop("checked"));
     });
-
-
-    // Create an appointment
-    $("#createappointment").on("click", function() {
-        $("#appointments").hide("slide", 1000);
-        $("#events").hide("slide", 1000);
-        $("#createappointmentform").show("slide", 1000);
-    })
 
 });
 
