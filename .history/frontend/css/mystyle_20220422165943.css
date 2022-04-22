@@ -41,6 +41,5 @@ body{
     background-color:blue;
 }
 
-.noevent:hover{
-    pointer-events: none;
-}
+.unclickable {
+<div class='col-md-2 event'

@@ -19,48 +19,33 @@ $(function() {
         //  Appointment("25-06-2027", "Meeting4", "22-05-2025 19:30:00", "18:00", "18:30", [2, 3]) also:
         // Appointment("Tag-Monat-Jahr", "MeetingNummer", "ExpirationDate", "UhrzeitBeginn", "Uhrzeitende", "OptionsID");
         // Appointment ($date,$title,$votingExpirationDate,$begin,$end,$optionIDs)3222
-            console.log("success");
+            console.log("success3");
             $.each(response, (i : number,val) => { 
-                let counter = 1;
                 var date = new Date(val["date"]["date"]);
                 var month = months[date.getMonth()];
                 var day = days[date.getDay()];
                 var dayOfMonth = date.getDate();
                 var year = date.getFullYear();
-                var expiration = val["votingExpirationDate"]["date"].substr(0, 19);
-                var begin = val["begin"]["date"].substr(11).substr(0, 8);
-                var end = val["end"]["date"].substr(11).substr(0, 8);
+                var expiration = val["votingExpirationDate"]["date"].substr(0,19);
+                var begin = val["begin"]["date"].substr(11).substr(0,8);
+                var end = val["end"]["date"].substr(11).substr(0,8);
                 var id = val["optionIDs"];
                
 
                 
-                $("#events").append("<div class='col-md-2 event' id =" + counter + " + data=" + id + ">" +
+                $("#events").append(
+                    "<div class='col-md-2 event' data=" + id + ">" +
                     "<div class='col wrapper'>" +
-                    "<h2>" + val["title"] + "</h2>" +
+                    "<h2>" + val["title"] +"</h2>" +
                     "<h4>" + month + "</h4>" +
-                    "<h3>" + dayOfMonth + "</h3>" +
+                    "<h3>"+ dayOfMonth +"</h3>" + 
                     "<p>" + day + "</p>" +
                     "<p>Begins: " + begin + "</p>" +
                     "<p>Ends: " + end + "</p>" +
                     "<h6><p>Voting ends:</p>" +
                     "<p>" + expiration + "</p></h6>" + 
-                    "</div> </div>"
-                    );
-
-
-                let isexpired = new Date(expiration);
-                var today = new Date();
-                if (isexpired <= today) {
-                    $("#" + counter).append("<h5 class = 'mt-3' > abgelaufen! </h5>");
-                    $("#" + counter).attr("class", "col-md-2 noevent");
-                }
-
-                counter++;
-            
-            
-            })},
-
-                
+                    "</div></div>"
+                )})},
                 
         complete: function () {
             $(".event").on('click', e =>{

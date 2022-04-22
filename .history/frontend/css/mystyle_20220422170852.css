@@ -41,6 +41,6 @@ body{
     background-color:blue;
 }
 
-.noevent:hover{
+.noHover{
     pointer-events: none;
 }

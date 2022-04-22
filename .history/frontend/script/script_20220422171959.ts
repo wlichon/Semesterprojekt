@@ -27,9 +27,9 @@ $(function() {
                 var day = days[date.getDay()];
                 var dayOfMonth = date.getDate();
                 var year = date.getFullYear();
-                var expiration = val["votingExpirationDate"]["date"].substr(0, 19);
-                var begin = val["begin"]["date"].substr(11).substr(0, 8);
-                var end = val["end"]["date"].substr(11).substr(0, 8);
+                var expiration = val["votingExpirationDate"]["date"].substr(0,19);
+                var begin = val["begin"]["date"].substr(11).substr(0,8);
+                var end = val["end"]["date"].substr(11).substr(0,8);
                 var id = val["optionIDs"];
                
 

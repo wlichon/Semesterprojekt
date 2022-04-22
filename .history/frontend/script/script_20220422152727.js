@@ -1,3 +1,4 @@
+"use strict";
 var months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 var days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 var slidebutton = "<div class='btn btn-primary col-auto p-1' id='lslide'><i class='bi bi-chevron-left'></i></div>";
@@ -7,18 +8,13 @@ $(function () {
     $("#events").hide();
     $.ajax({
         type: "GET",
-        url: "backend/serviceHandler.php",
+        url: "backend/serviceHandler.php",              // geh zum ServiceHandler -> Funktion Parameter werden überprüft -> 
         cache: false,
-        data: { "function": "loadAppointments" },
+        data: { function: "loadAppointments" },         // kein Parameter nötig, da alle Meetings geladen werden
         dataType: "json",
         success: function (response) {
-            // bei sucess liefert loadAppointments ein Array mit den ganzen Appointments in dem Format:
-            //  Appointment("25-06-2027", "Meeting4", "22-05-2025 19:30:00", "18:00", "18:30", [2, 3]) also:
-            // Appointment("Tag-Monat-Jahr", "MeetingNummer", "ExpirationDate", "UhrzeitBeginn", "Uhrzeitende", "OptionsID");
-            // Appointment ($date,$title,$votingExpirationDate,$begin,$end,$optionIDs)3222
             console.log("success");
             $.each(response, function (i, val) {
-                var counter = 1;
                 var date = new Date(val["date"]["date"]);
                 var month = months[date.getMonth()];
                 var day = days[date.getDay()];
@@ -28,7 +24,7 @@ $(function () {
                 var begin = val["begin"]["date"].substr(11).substr(0, 8);
                 var end = val["end"]["date"].substr(11).substr(0, 8);
                 var id = val["optionIDs"];
-                $("#events").append("<div class='col-md-2 event' id =" + counter + " + data=" + id + ">" +
+                $("#events").append("<div class='col-md-2 event' data=" + id + ">" +
                     "<div class='col wrapper'>" +
                     "<h2>" + val["title"] + "</h2>" +
                     "<h4>" + month + "</h4>" +
@@ -38,19 +34,24 @@ $(function () {
                     "<p>Ends: " + end + "</p>" +
                     "<h6><p>Voting ends:</p>" +
                     "<p>" + expiration + "</p></h6>" +
-                    "</div> </div>");
-                var isexpired = new Date(expiration);
-                var today = new Date();
-                if (isexpired <= today) {
-                    $("#" + counter).append("<h5 class = 'mt-3' > abgelaufen! </h5>");
-                    $("#" + counter).attr("class", "col-md-2 noevent");
-                }
-                counter++;
+                    "</div></div>"
+                    );
+                    
+                    let isexpired = new Date(expiration);
+                    console.log(isexpired.getUTCDate());
+                    console.log(isexpired.getUTCMonth() + 1);
+                    console.log(isexpired.getUTCFullYear());
+                    var today = new Date();
+                    today.setHours(0,0,0,0);
+                    if (isexpired <= today) {
+                        console.log("Wegdamit");
+                    }
+                
             });
         },
         complete: function () {
             $(".event").on('click', function (e) {
-                var self = e.currentTarget; // Element was das Klick getriggert hat
+                var self = e.currentTarget;
                 $("#events").hide("slide", { direction: "left" }, 1000, function () {
                     console.log(self);
                     var optionIDs_string = self.getAttribute("data");
@@ -60,7 +61,7 @@ $(function () {
                         type: "GET",
                         url: "backend/serviceHandler.php",
                         cache: false,
-                        data: { "function": "loadOptions", param: optionIDs },
+                        data: { function: "loadOptions", param: optionIDs },    // für die Funktion loadOptions brauchen wir die jeweilige ID des Meetings das wir zuvor angeklickt haben
                         dataType: "json",
                         success: function (response) {
                             console.log("success");

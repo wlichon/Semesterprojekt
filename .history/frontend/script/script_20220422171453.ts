@@ -27,27 +27,28 @@ $(function() {
                 var day = days[date.getDay()];
                 var dayOfMonth = date.getDate();
                 var year = date.getFullYear();
-                var expiration = val["votingExpirationDate"]["date"].substr(0, 19);
-                var begin = val["begin"]["date"].substr(11).substr(0, 8);
-                var end = val["end"]["date"].substr(11).substr(0, 8);
+                var expiration = val["votingExpirationDate"]["date"].substr(0,19);
+                var begin = val["begin"]["date"].substr(11).substr(0,8);
+                var end = val["end"]["date"].substr(11).substr(0,8);
                 var id = val["optionIDs"];
                
 
                 
-                $("#events").append("<div class='col-md-2 event' id =" + counter + " + data=" + id + ">" +
+                $("#events").append(
+                    "<div class='col-md-2 event' id =eventnr" + counter + " + data=" + id + ">"  +
                     "<div class='col wrapper'>" +
-                    "<h2>" + val["title"] + "</h2>" +
+                    "<h2>" + val["title"] +"</h2>" +
                     "<h4>" + month + "</h4>" +
-                    "<h3>" + dayOfMonth + "</h3>" +
+                    "<h3>"+ dayOfMonth +"</h3>" + 
                     "<p>" + day + "</p>" +
                     "<p>Begins: " + begin + "</p>" +
                     "<p>Ends: " + end + "</p>" +
                     "<h6><p>Voting ends:</p>" +
                     "<p>" + expiration + "</p></h6>" + 
-                    "</div> </div>"
-                    );
+                    "</div></div>"
+                )
 
-
+                
                 let isexpired = new Date(expiration);
                 var today = new Date();
                 if (isexpired <= today) {

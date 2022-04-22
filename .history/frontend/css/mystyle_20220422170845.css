@@ -38,9 +38,9 @@ body{
 }
 
 .event:hover{
-    background-color:blue;
+    background-color:green;
 }
 
-.noevent:hover{
+.noHover{
     pointer-events: none;
 }
