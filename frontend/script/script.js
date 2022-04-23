@@ -2,7 +2,7 @@
 var months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 var days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 var slidebutton = "<div class='btn btn-primary col-auto p-1' id='lslide'><i class='bi bi-chevron-left'></i></div>";
-var commentbar = "<div class='row mt-5 comment'><div class='input-group input-group-lg'><span class='input-group-text' id='inputGroup-sizing-lg'>Comment</span><input type='text' class='form-control' aria-label='Sizing example input' aria-describedby='inputGroup-sizing-lg'><button class='btn btn-outline-secondary bg-primary text-white' type='button' id='submit'>Submit</button></div></div>";
+var commentbar = "<div class='row mt-5 comment'><div class='input-group input-group-lg'><span class='input-group-text' id='inputGroup-sizing-lg'>Comment</span><input type='text' name='check_list[]' class='form-control' aria-label='Sizing example input' aria-describedby='inputGroup-sizing-lg'><button class='btn btn-outline-secondary bg-primary text-white' type='submit' name='submitnamecommentcheckbox'>Submit</button></div></div>";
 $(function () {
     $("#appointments").hide();
     $("#events").hide();
@@ -68,6 +68,7 @@ $(function () {
                             console.log("success");
                             console.log(response);
                             $.each(response, function (i, val) {
+                                var checkBoxId = 1;
                                 var date = new Date(val["date"]["date"]);
                                 console.log("loop");
                                 var month = months[date.getMonth()];
@@ -76,7 +77,8 @@ $(function () {
                                 var year = date.getFullYear();
                                 var begin = val["begin"]["date"].substr(11).substr(0, 8);
                                 var end = val["end"]["date"].substr(11).substr(0, 8);
-                                $("#appointments").append("<div class='col-md'>" +
+                                $("#appointments").append(checkBoxId++ +
+                                    "<div class='col-md'>" +
                                     "<div class='col-md event'>" +
                                     "<div class='col wrapper'>" +
                                     "<h4>" + month + "</h4>" +
@@ -86,7 +88,7 @@ $(function () {
                                     "<p>Ends: " + end + "</p>" +
                                     "</div></div>" +
                                     "<div class='row inputs h-20'>" +
-                                    "<div class='col-md'><input class='form-check-input' type='checkbox' value=''></div></div></div>");
+                                    "<div class='col-md'><input class='form-check-input' type='checkbox' name = 'check_list[]' value='termin" + checkBoxId + "'" + "></div></div></div>");
                             });
                             $("#appointments").append(slidebutton + commentbar);
                             $("#lslide").on('click', slidebar);
