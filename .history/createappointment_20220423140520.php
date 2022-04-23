@@ -15,10 +15,10 @@ $terminoption2 = $_POST["terminoption2"];
 echo $title, "<br>";
 echo $date, "<br>";
 echo $votingExpirationDate, "<br>";
-echo $endTime, "<br>";
-echo $beginTime, "<br>";
-echo $terminoption1, "<br>";
-echo $terminoption2, "<br>";
+echo $endTime;
+echo $beginTime;
+echo $terminoption1;
+echo $terminoption2;
 
 // store in database
 // über den serviceHandler neue Funktion erstellen die alles in die Datenbank schickt
