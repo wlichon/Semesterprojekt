@@ -80,7 +80,8 @@ $(function() {
                     success: function (response) {
                         console.log("success")
                         console.log(response);
-                        $.each(response, (i: number,val) =>{
+                        $.each(response, (i,val) =>{
+                            let counter = 0;
                             var date = new Date(val["date"]["date"]);
                             console.log("loop");
                             var month = months[date.getMonth()];
@@ -101,11 +102,11 @@ $(function() {
                                 "<p>Ends: " + end + "</p>" +
                                 "</div></div>" +
                                 "<div class='row inputs h-20'>" +
-                                "<div class='col-md'><input class='form-check-input' type='checkbox' name = 'check_list[]' value='termin" + i + "'" +  "></div></div></div>"
-                            )
-                            
-                        
-                        })
+                                "<div class='col-md'><input class='form-check-input' type='checkbox' name = 'check_list[]' value='termin" + counter + "'" +  "></div></div></div>"
+                                )
+                                
+                            counter++;
+                            })
                             
                         $("#appointments").append(slidebutton + commentbar);
                         $("#lslide").on('click', slidebar)

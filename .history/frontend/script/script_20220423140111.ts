@@ -103,6 +103,8 @@ $(function() {
                                 "<div class='row inputs h-20'>" +
                                 "<div class='col-md'><input class='form-check-input' type='checkbox' name = 'check_list[]' value='termin" + i + "'" +  "></div></div></div>"
                             )
+                                
+                            counter++;
                             
                         
                         })
