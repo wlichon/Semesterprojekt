@@ -37,6 +37,7 @@ $(function() {
                 
                 $("#events").append("<div class='col-md-2 event' id ='event" + i + "'" + "data='" + id + "'>" +
                     "<div class='col wrapper'>" +
+                    "<h2>" + "event" + i + "</h2>";
                     "<h2>" + val["title"] + "</h2>" +
                     "<h4>" + month + "</h4>" +
                     "<h3>" + dayOfMonth + "</h3>" +

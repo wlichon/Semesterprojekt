@@ -37,8 +37,8 @@ class DataHandler
     private static function getDemoAppointments()
     {
         $demodata = [
-            new Appointment("22-03-2022", "Meeting", "20-03-2022 12:00:00", "12:00", "13:00", [1, 2]),  // AppointmentKonstruktor: new Appointment ($date,$title,$votingExpirationDate,$begin,$end,$optionIDs) 
-            new Appointment("23-04-2023", "Meeting2", "21-03-2022 14:30:00", "15:00", "17:00", [3, 4]),
+            new Appointment("22-03-2023", "Meeting", "20-03-2022 12:00:00", "12:00", "13:00", [1, 2]),  // AppointmentKonstruktor: new Appointment ($date,$title,$votingExpirationDate,$begin,$end,$optionIDs) 
+            new Appointment("23-04-2023", "Meeting2", "21-03-2023 14:30:00", "15:00", "17:00", [3, 4]),
             new Appointment("24-05-2024", "Meeting3", "22-05-2024 01:00:00", "8:00", "13:00", [1, 4]),
             new Appointment("25-06-2027", "Meeting4", "22-05-2025 19:30:00", "18:00", "18:30", [2, 3])
         ];
