@@ -48,8 +48,8 @@ $(function() {
                 let isexpired = new Date(expiration);
                 var today = new Date();
                 if (isexpired <= today) {
-                    $("#option" + i).append("<h5 class = 'mt-3' > abgelaufen! </h5>");
-                    $("#option" + i).attr("class", "col-md-2 noevent");
+                    $("#" + i).append("<h5 class = 'mt-3' > abgelaufen! </h5>");
+                    $("#" + i).attr("class", "col-md-2 noevent");
                 }
 
                 counter++;

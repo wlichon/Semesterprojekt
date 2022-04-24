@@ -36,7 +36,7 @@ $(function() {
                 var id = val["id"];               
 
                 
-                $("#events").append("<div class='col-md-2 event' id ='option" + i + "' + data=" + id + ">" +
+                $("#events").append("<div class='col-md-2 event' id =" + i + " + data=" + id + ">" +
                     "<div class='col wrapper'>" +
                     "<h2>" + val["title"] + "</h2>" +
                     "<h6><p>Voting ends:</p>" +
@@ -48,8 +48,8 @@ $(function() {
                 let isexpired = new Date(expiration);
                 var today = new Date();
                 if (isexpired <= today) {
-                    $("#option" + i).append("<h5 class = 'mt-3' > abgelaufen! </h5>");
-                    $("#option" + i).attr("class", "col-md-2 noevent");
+                    $("#" + i).append("<h5 class = 'mt-3' > abgelaufen! </h5>");
+                    $("#" + i).attr("class", "col-md-2 noevent");
                 }
 
                 counter++;

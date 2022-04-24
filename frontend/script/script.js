@@ -32,7 +32,7 @@ $(function () {
                 var begin = val["begin"]["date"].substr(11).substr(0, 8);
                 var end = val["end"]["date"].substr(11).substr(0, 8);
                 var id = val["id"];
-                $("#events").append("<div class='col-md-2 event' id =" + counter + " + data=" + id + ">" +
+                $("#events").append("<div class='col-md-2 event' id ='option" + i + "' + data=" + id + ">" +
                     "<div class='col wrapper'>" +
                     "<h2>" + val["title"] + "</h2>" +
                     "<h6><p>Voting ends:</p>" +
@@ -41,8 +41,8 @@ $(function () {
                 var isexpired = new Date(expiration);
                 var today = new Date();
                 if (isexpired <= today) {
-                    $("#" + counter).append("<h5 class = 'mt-3' > abgelaufen! </h5>");
-                    $("#" + counter).attr("class", "col-md-2 noevent");
+                    $("#option" + i).append("<h5 class = 'mt-3' > abgelaufen! </h5>");
+                    $("#option" + i).attr("class", "col-md-2 noevent");
                 }
                 counter++;
             });
