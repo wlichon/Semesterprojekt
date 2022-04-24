@@ -73,9 +73,9 @@ class DataHandler
 
     function createOptions($optionbegin, $optionend, $meetingID)
     {
-        $sql = "INSERT INTO Options (begin, end, fk_a_id) VALUES (?, ?, ?);";
+        $sql = "INSERT INTO Options (begin, end) VALUES (?, ?);";
         $statement = $this->conn->prepare($sql);
-        $statement->bind_param("ssi", $optionbegin, $optionend, $meetingID);
+        $statement->bind_param("ss", $optionbegin, $optionend);
         $statement->execute();
     }
 

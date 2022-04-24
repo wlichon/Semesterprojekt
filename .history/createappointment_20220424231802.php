@@ -7,7 +7,6 @@ if (!isset($_POST["submit"])) {
     header('location: http://localhost/Semesterprojekt/');
 }
 
-$meetingID = $_POST["meetingid"];
 $date = $_POST["date"];
 $title = $_POST["title"];
 $votingExpirationDate = $_POST["votingExpirationDate"];
@@ -19,8 +18,7 @@ $option2begin = $_POST["terminoption2begin"];
 $option2end = $_POST["terminoption2end"];
 
 $datahandler = new DataHandler($conn);
-$datahandler->createAppointments($meetingID, $title, $votingExpirationDate, $beginTime, $endTime, $date);
-$datahandler->createOptions($option1begin, $option1end, $meetingID);
-$datahandler->createOptions($option2begin, $option2end, $meetingID);
+$datahandler->createOptions($option1begin, $option1end);
+$datahandler->createAppointments($title, $votingExpirationDate, $beginTime, $endTime, $date);
 
 header('location: http://localhost/Semesterprojekt');

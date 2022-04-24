@@ -67,15 +67,15 @@ class DataHandler
     {
         $sql = "INSERT INTO Appointment (a_id, title, votingExpirationDate, begin, end, date) VALUES (?, ?, ?, ?, ?, ?);";
         $statement = $this->conn->prepare($sql);
-        $statement->bind_param("isssss", $meetingID, $title, $votingExpirationDate, $begin, $end, $date);
+        $statement->bind_param("sssss", $title, $votingExpirationDate, $begin, $end, $date);
         $statement->execute();
     }
 
-    function createOptions($optionbegin, $optionend, $meetingID)
+    function createOptions($optionbegin, $optionend)
     {
-        $sql = "INSERT INTO Options (begin, end, fk_a_id) VALUES (?, ?, ?);";
+        $sql = "INSERT INTO Options (begin, end) VALUES (?, ?);";
         $statement = $this->conn->prepare($sql);
-        $statement->bind_param("ssi", $optionbegin, $optionend, $meetingID);
+        $statement->bind_param("ss", $optionbegin, $optionend);
         $statement->execute();
     }
 
