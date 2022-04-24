@@ -5,15 +5,15 @@ class Appointment {
     public $begin;
     public $end;
     public $date;
-    public $optionIDs;
+    public $id;
 
-    function __construct($date,$title,$votingExpirationDate,$begin,$end,$optionIDs) {
+    function __construct($date,$title,$votingExpirationDate,$begin,$end,$id) {
         $this->date = date_create($date);
         $this->title = $title;
         $this->votingExpirationDate = date_create($votingExpirationDate);
         $this->begin = date_create($begin);
         $this->end = date_create($end);
-        $this->optionIDs = $optionIDs;
+        $this->id = $id;
       }
 }
 

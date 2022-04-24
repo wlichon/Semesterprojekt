@@ -1,5 +1,6 @@
 <?php
 include("businessLogic/logic.php");
+include(__DIR__."\db\db.php");
 
 $param = "";
 $function = "";
@@ -9,7 +10,8 @@ isset($_GET["param"]) ? $param = $_GET["param"] : false;
 
 //echo (json_encode($param[0]));
 
-$logic = new Logic();                               // neue Logik konstruiert, mit eben DataHandler als Unterklasse und RequestHandler
+
+$logic = new Logic($conn);                               // neue Logik konstruiert, mit eben DataHandler als Unterklasse und RequestHandler
 $result = $logic->handleRequest($function, $param);
 // führe mit der function die wir von javascript mit ajax call fordern, einen handleRequest auf (LOGIK)
 // schaut dann einfach welche FUnktion wir ausführen müssen von der dataHandler Klasse

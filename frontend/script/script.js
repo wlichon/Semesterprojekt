@@ -19,8 +19,10 @@ $(function () {
             // Appointment("Tag-Monat-Jahr", "MeetingNummer", "ExpirationDate", "UhrzeitBeginn", "Uhrzeitende", "OptionsID");
             // Appointment ($date,$title,$votingExpirationDate,$begin,$end,$optionIDs)3222
             console.log("success");
+            console.log(response);
             $.each(response, function (i, val) {
                 var counter = 1;
+                //console.log(val[2]);
                 var date = new Date(val["date"]["date"]);
                 var month = months[date.getMonth()];
                 var day = days[date.getDay()];
@@ -29,15 +31,10 @@ $(function () {
                 var expiration = val["votingExpirationDate"]["date"].substr(0, 19);
                 var begin = val["begin"]["date"].substr(11).substr(0, 8);
                 var end = val["end"]["date"].substr(11).substr(0, 8);
-                var id = val["optionIDs"];
+                var id = val["id"];
                 $("#events").append("<div class='col-md-2 event' id =" + counter + " + data=" + id + ">" +
                     "<div class='col wrapper'>" +
                     "<h2>" + val["title"] + "</h2>" +
-                    "<h4>" + month + "</h4>" +
-                    "<h3>" + dayOfMonth + "</h3>" +
-                    "<p>" + day + "</p>" +
-                    "<p>Begins: " + begin + "</p>" +
-                    "<p>Ends: " + end + "</p>" +
                     "<h6><p>Voting ends:</p>" +
                     "<p>" + expiration + "</p></h6>" +
                     "</div> </div>");
@@ -55,18 +52,16 @@ $(function () {
                 var self = e.currentTarget; // Element was das Klick getriggert hat
                 $("#events").hide("slide", { direction: "left" }, 1000, function () {
                     console.log(self);
-                    var optionIDs_string = self.getAttribute("data");
-                    var optionIDs = Array.from(optionIDs_string.split(","));
-                    console.log(optionIDs);
+                    var appointmentID = self.getAttribute("data");
+                    console.log(appointmentID);
                     $.ajax({
                         type: "GET",
                         url: "backend/serviceHandler.php",
                         cache: false,
-                        data: { function: "loadOptions", param: optionIDs },
+                        data: { function: "loadOptions", param: appointmentID },
                         dataType: "json",
                         success: function (response) {
                             console.log("success");
-                            console.log(response);
                             $.each(response, function (i, val) {
                                 var date = new Date(val["date"]["date"]);
                                 console.log("loop");

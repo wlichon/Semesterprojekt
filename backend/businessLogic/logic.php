@@ -4,9 +4,9 @@ include("db/dataHandler.php");
 class Logic
 {
     private $dh;
-    function __construct()
+    function __construct($conn)
     {
-        $this->dh = new DataHandler();          // erstelle neuen DataHandler (Klasse mit den ganzen Funktionen)
+        $this->dh = new DataHandler($conn);          // erstelle neuen DataHandler (Klasse mit den ganzen Funktionen)
     }
 
     function handleRequest($function, $param)
