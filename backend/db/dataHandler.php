@@ -1,18 +1,55 @@
 <?php
-include("./models/appointment.php");
-include("./models/option.php");
+include(__dir__."\..\models\appointment.php");
+include(__dir__."\..\models\option.php");
 class DataHandler
 {
-    public function queryAppointments()
-    {
-        $res =  $this->getDemoAppointments();       // retourniert array von DemoAppointments
-        return $res;
+    public $conn;
+
+    function __construct($conn) {
+        $this->conn = $conn;
+       
+      }
+
+
+    public function queryAppointments(){
+        $sql = "SELECT * FROM Appointment;";
+        $result = $this->conn->query($sql);
+        if ($result->num_rows > 0) {
+            $array = $result->fetch_all();
+            $data = array();
+            $iterator = 0;
+            foreach ($array as $item){
+                $data[$iterator] = new Appointment($item[2],$item[1],$item[5],$item[3],$item[4],$item[0]);
+                //new Appointment("22-03-2022", "Meeting", "20-03-2022 12:00:00", "12:00", "13:00", [1, 2]),
+                //$date,$title,$votingExpirationDate,$begin,$end,$optionIDs
+                $iterator++;
+            }
+             
+          }
+          return $data;
     }
 
-    public function queryOptions()
-    {
-        $res =  $this->getDemoOptions();        // retourniert array von den DemoOptions
-        return $res;
+    public function queryOptions($id){
+        $sql = "SELECT * FROM Options WHERE fk_a_id=?;";
+        $statement = $this->conn->prepare($sql);
+        $statement->bind_param("i",$id);
+        $statement->execute();
+        $result = $statement->get_result();
+
+        
+
+        if ($result->num_rows > 0) {
+            $array = $result->fetch_all();
+            $data = array();
+            $iterator = 0;
+            foreach ($array as $item){
+                $data[$iterator] = new Option($item[2],$item[0],$item[3],$item[4]);
+                //new Appointment("22-03-2022", "Meeting", "20-03-2022 12:00:00", "12:00", "13:00", [1, 2]),
+                //new Option($date,$id,$begin,$end)
+                $iterator++;
+            }
+        }
+        return $data;
     }
 
     public function loadAppointments()
@@ -21,43 +58,40 @@ class DataHandler
         foreach ($this->queryAppointments() as $val) {          // lade einfach alle DemoAppointments
             array_push($result, $val);
         }
+        //print_r($result);
         return $result;
     }
 
     public function loadOptions($id)
     { //$id ist ein array von id's
         $result = array();
-        foreach ($this->queryOptions() as $val) {           // lade die Options als variable
-            if (in_array($val->id, $id))                    // falls die die id einer DemoOption im Array $id ist, dann
-                array_push($result, $val);                  // push den value in das result-array
+        foreach ($this->queryOptions($id) as $val) {           // lade die Options als variable
+                                                            // falls die die id einer DemoOption im Array $id ist, dann
+            array_push($result, $val);                  // push den value in das result-array
         }                                                   // somit weiß man welche DemoOptions man laden muss
         return $result;
     }
-
-    private static function getDemoAppointments()
-    {
-        $demodata = [
-            new Appointment("22-03-2022", "Meeting", "20-03-2022 12:00:00", "12:00", "13:00", [1, 2]),  // AppointmentKonstruktor: new Appointment ($date,$title,$votingExpirationDate,$begin,$end,$optionIDs) 
-            new Appointment("23-04-2023", "Meeting2", "21-03-2023 14:30:00", "15:00", "17:00", [3, 4]),
-            new Appointment("24-05-2024", "Meeting3", "22-05-2024 01:00:00", "8:00", "13:00", [1, 4]),
-            new Appointment("25-06-2027", "Meeting4", "22-05-2025 19:30:00", "18:00", "18:30", [2, 3])
-        ];
-        return $demodata;
-    }
-
-    private static function getDemoOptions()
-    {
-        $demodata = [
-            new Option("2022-03-15", 1, "12:00", "13:00"), // OptionKonstruktor: new Option($date,$id,$begin,$end)
-            new Option("2022-04-11", 2, "15:00", "16:00"),
-            new Option("2022-03-25", 3, "11:20", "12:00"),
-            new Option("2022-05-15", 4, "8:00", "19:30")
-        ];
-        return $demodata;
-    }
 }
+/*
 
-//$test = new DataHandler;
+include("db.php");
+
+$test = new DataHandler($conn);
+$test->loadAppointments();
+$test->loadOptions(1);
+
+
+echo "over";
+*/
+
+
+
+
+//$array = $test->queryAppointments();
+
+//$first = $array[1];
+
+//echo date_format($first->date,"c");
 
 
 //$id = array(1,2);
