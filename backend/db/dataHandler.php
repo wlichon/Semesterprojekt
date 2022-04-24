@@ -8,8 +8,8 @@ class DataHandler
     function __construct($conn) {
         $this->conn = $conn;
        
-       
       }
+
 
     public function queryAppointments(){
         $sql = "SELECT * FROM Appointment;";
@@ -50,48 +50,14 @@ class DataHandler
             }
         }
         return $data;
-        $result = $this->conn->query($sql);
-        if ($result->num_rows > 0) {
-            $array = $result->fetch_all();
-            $data = array();
-            $iterator = 0;
-            foreach ($array as $item){
-                $data[$iterator] = new Appointment($item[2],$item[1],$item[5],$item[3],$item[4],$item[0]);
-                //new Appointment("22-03-2022", "Meeting", "20-03-2022 12:00:00", "12:00", "13:00", [1, 2]),
-        //print_r($result);
-                //$date,$title,$votingExpirationDate,$begin,$end,$optionIDs
-                $iterator++;
-            }
-             
-          }
-          return $data;
-        foreach ($this->queryOptions($id) as $val) {           // lade die Options als variable
-                                                            // falls die die id einer DemoOption im Array $id ist, dann
-    public function queryOptions($id){
-        $sql = "SELECT * FROM Options WHERE fk_a_id=?;";
-        $statement = $this->conn->prepare($sql);
-        $statement->bind_param("i",$id);
-                $data[$iterator] = new Option($item[2],$item[0],$item[3],$item[4]);
-/*
+    }
 
-include("db.php");
-
-$test = new DataHandler($conn);
-$test->loadAppointments();
-$test->loadOptions(1);
-
-
-echo "over";
-*/
-
-
-
-
-//$array = $test->queryAppointments();
-                //new Appointment("22-03-2022", "Meeting", "20-03-2022 12:00:00", "12:00", "13:00", [1, 2]),
-//$first = $array[1];
+    public function loadAppointments()
+    {
+        $result = array();
+        foreach ($this->queryAppointments() as $val) {          // lade einfach alle DemoAppointments
             array_push($result, $val);
-//echo date_format($first->date,"c");
+        }
         //print_r($result);
         return $result;
     }
