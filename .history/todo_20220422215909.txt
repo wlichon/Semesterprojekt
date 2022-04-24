@@ -1,0 +1,6 @@
+1. Abgelaufene Appointments logic implementieren (nach ablauf nur Anzeige ohne bearbeitung)
+2. Design verbessern (?)
+3. Kommentare speichern
+4. Neue Appointments anlegen (serviceHandler erweitern), beliebige Anzahl an Terminoptionen (Layout anpassen?)
+5. Button zur Eintragung in Datenbank ist vorhanden und funktioniert wie gefordert (steht so in der Angabe kp was das genau heißen soll)
+6. Bestehende Appointments können gelöscht werden (Extrapunkte)

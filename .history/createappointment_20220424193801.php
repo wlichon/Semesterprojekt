@@ -1,3 +1,4 @@
+createappointment.php
 <?php
 //include("backend\models\appointment.php");
 include("backend\db\dataHandler.php");
@@ -16,4 +17,6 @@ $endTime = $_POST["end"];
 $datahandler = new DataHandler($conn);
 $datahandler->createAppointments($title, $votingExpirationDate, $beginTime, $endTime, $date);
 
-header('location: http://localhost/Semesterprojekt');
+// store in database
+// über den serviceHandler neue Funktion erstellen die alles in die Datenbank schickt
+$appointment = new Appointment($date, $title, $votingExpirationDate, $beginTime, $endTime, [10, 20]);

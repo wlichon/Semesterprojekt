@@ -16,4 +16,4 @@ $endTime = $_POST["end"];
 $datahandler = new DataHandler($conn);
 $datahandler->createAppointments($title, $votingExpirationDate, $beginTime, $endTime, $date);
 
-header('location: http://localhost/Semesterprojekt');
+header('location: http://localhost/Semesterprojekt/created');

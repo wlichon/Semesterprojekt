@@ -65,9 +65,9 @@ class DataHandler
 
     function createAppointments($title, $votingExpirationDate, $begin, $end, $date)
     {
-        $sql = "INSERT INTO Appointment (title, votingExpirationDate, begin, end, date) VALUES (?, ?, ?, ?, ?);";
+        $sql = "INSERT INTO Appointment (title, votingExpirationDate, beginTime, endTime, meetingDate) VALUES (?, ?, ?, ?, ?);";
         $statement = $this->conn->prepare($sql);
-        $statement->bind_param("sssss", $title, $votingExpirationDate, $begin, $end, $date);
+        $statement->bind_param("isddd", $title, $votingExpirationDate, $begin, $end, $date);
         $statement->execute();
     }
 

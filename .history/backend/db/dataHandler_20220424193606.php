@@ -63,14 +63,6 @@ class DataHandler
         return $result;
     }
 
-    function createAppointments($title, $votingExpirationDate, $begin, $end, $date)
-    {
-        $sql = "INSERT INTO Appointment (title, votingExpirationDate, begin, end, date) VALUES (?, ?, ?, ?, ?);";
-        $statement = $this->conn->prepare($sql);
-        $statement->bind_param("sssss", $title, $votingExpirationDate, $begin, $end, $date);
-        $statement->execute();
-    }
-
     public function loadOptions($id)
     { //$id ist ein array von id's
         $result = array();
