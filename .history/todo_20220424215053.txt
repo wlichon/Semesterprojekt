@@ -6,7 +6,5 @@ erledigt 5. Button zur Eintragung in Datenbank ist vorhanden und funktioniert wi
 6. Bestehende Appointments können gelöscht werden (Extrapunkte)
 
 Updated:
-1. Eintragung der Termin Optionen in Options Tabelle bei Erstellung neuer Appintments
-2. Formatierung von neue Appointments erstellen verbessern -> createappointment.php datei benutzt eigenen datahandler
-3. Appointmens können gelöscht werden
-4. Personen Tabelle mit  PersonID, Name um Anzeige bei Kommentare
+1. Eintragung der TerminOptionen in Options Tabelle bei Erstellung neuer Appintments
+2. Formatierung von neueAppointments erstellen verbessern
