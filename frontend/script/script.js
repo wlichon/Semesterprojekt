@@ -109,6 +109,131 @@ $(function () {
         $("#events").hide("slide", 1000);
         $("#createappointmentform").show("slide", 1000);
     });
+    var frm = $('#createappointmentform');
+    frm.submit(function (e) {
+        e.preventDefault();
+        $("createappointment").show();
+        var date = $("#date").val();
+        var meetingID = $("#meetingid").val();
+        var title = $("#title").val();
+        var votingExpirationDate = $("#votingExpirationDate").val();
+        var begin = $("#begin").val();
+        var end = $("#end").val();
+        var terminoption1begin = $("#terminoption1begin").val();
+        var terminoption1end = $("#terminoption1end").val();
+        var terminoption2begin = $("#terminoption2begin").val();
+        var terminoption2end = $("#terminoption2end").val();
+        console.log(date, meetingID, title, votingExpirationDate, begin, end, terminoption1begin, terminoption1end, terminoption2begin, terminoption2end);
+        $.ajax({
+            type: "GET",
+            url: "backend/serviceHandler.php",
+            data: { function: "createAppointmentWithOptions", param1: date,
+                param2: meetingID, param3: title, param4: votingExpirationDate, param5: begin, param6: end, param7: terminoption1begin,
+                param8: terminoption1end, param9: terminoption2begin, param10: terminoption2end },
+            success: function (data) {
+                alert("Diese MeetingID ist leider schon vergeben! Bitte wählen Sie eine andere MeetingID.");
+            },
+            error: function (data) {
+                $("#createappointmentform").hide("slide", 1000);
+                $("#events").empty();
+                var button = "<div class='col-md-3 d-flex justify-content-between' style='flex-direction: column'> <div class='col'> <h2 class='align-self-center'>Appointments</h2><p class=''>Click a meeting to vote for another date</p> </div><button class = 'btn-primary btn-lg' id = 'createappointment'> Click here to create an appointment</button></div></div>";
+                $('#events').append(button);
+                $("#createappointment").on("click", function () {
+                    $("#appointments").hide("slide", 1000);
+                    $("#events").hide("slide", 1000);
+                    $("#createappointmentform").show("slide", 1000);
+                });
+                $.ajax({
+                    type: "GET",
+                    url: "backend/serviceHandler.php",
+                    cache: false,
+                    data: { function: "loadAppointments" },
+                    dataType: "json",
+                    success: function (response) {
+                        console.log("success2222");
+                        console.log(response);
+                        $.each(response, function (i, val) {
+                            var counter = 1;
+                            //console.log(val[2]);
+                            var date = new Date(val["date"]["date"]);
+                            var month = months[date.getMonth()];
+                            var day = days[date.getDay()];
+                            var dayOfMonth = date.getDate();
+                            var year = date.getFullYear();
+                            var expiration = val["votingExpirationDate"]["date"].substr(0, 19);
+                            var begin = val["begin"]["date"].substr(11).substr(0, 8);
+                            var end = val["end"]["date"].substr(11).substr(0, 8);
+                            var id = val["id"];
+                            $("#events").append("<div class='col-md-2 event' id ='option" + i + "' + data=" + id + ">" +
+                                "<div class='col wrapper'>" +
+                                "<h2>" + val["title"] + "</h2>" +
+                                "<h6><p>Voting ends:</p>" +
+                                "<p>" + expiration + "</p></h6>" +
+                                "</div> </div>");
+                            var isexpired = new Date(expiration);
+                            var today = new Date();
+                            if (isexpired <= today) {
+                                $("#option" + i).append("<h5 class = 'mt-3' > abgelaufen! </h5>");
+                                $("#option" + i).attr("class", "col-md-2 noevent");
+                            }
+                            counter++;
+                        });
+                    },
+                    complete: function () {
+                        $(".event").on('click', function (e) {
+                            var self = e.currentTarget; // Element was das Klick getriggert hat
+                            $("#events").hide("slide", { direction: "left" }, 1000, function () {
+                                console.log(self);
+                                var appointmentID = self.getAttribute("data");
+                                console.log(appointmentID);
+                                $.ajax({
+                                    type: "GET",
+                                    url: "backend/serviceHandler.php",
+                                    cache: false,
+                                    data: { function: "loadOptions", param: appointmentID },
+                                    dataType: "json",
+                                    success: function (response) {
+                                        console.log("success");
+                                        $.each(response, function (i, val) {
+                                            var date = new Date(val["date"]["date"]);
+                                            console.log("loop");
+                                            var month = months[date.getMonth()];
+                                            var day = days[date.getDay()];
+                                            var dayOfMonth = date.getDate();
+                                            var year = date.getFullYear();
+                                            var begin = val["begin"]["date"].substr(11).substr(0, 8);
+                                            var end = val["end"]["date"].substr(11).substr(0, 8);
+                                            $("#appointments").append("<div class='col-md'>" +
+                                                "<div class='col-md event'>" +
+                                                "<div class='col wrapper'>" +
+                                                "<h4>" + month + "</h4>" +
+                                                "<h3>" + dayOfMonth + "</h3>" +
+                                                "<p>" + day + "</p>" +
+                                                "<p>Begins: " + begin + "</p>" +
+                                                "<p>Ends: " + end + "</p>" +
+                                                "</div></div>" +
+                                                "<div class='row inputs h-20'>" +
+                                                "<div class='col-md'><input class='form-check-input' type='checkbox' name = 'check_list[]' value='termin" + i + "'" + "></div></div></div>");
+                                        });
+                                        $("#appointments").append(slidebutton + commentbar);
+                                        $("#lslide").on('click', slidebar);
+                                    },
+                                    error: function (response) {
+                                        console.log("failure");
+                                    }
+                                }),
+                                    setTimeout(function () { return $("#appointments").show("slide", 1000); }, 100);
+                            });
+                        });
+                        $("#events").show("slide", 1000);
+                    },
+                    error: function (e) {
+                        console.log("failure");
+                    },
+                });
+            } // richtig
+        });
+    });
 });
 var optionNameInput = '<div class="col-md d-flex justify-content-between" style="flex-direction: column">' +
     '<div class="row h-80">' +
