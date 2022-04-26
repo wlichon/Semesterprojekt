@@ -22,40 +22,8 @@ $(function() {
         // Appointment ($date,$title,$votingExpirationDate,$begin,$end,$optionIDs)3222
             console.log("success");
             console.log(response);
-            $.each(response, (i : number,val) => { 
-                let counter = 1;
-                //console.log(val[2]);
-                var date = new Date(val["date"]["date"]);
-                var month = months[date.getMonth()];
-                var day = days[date.getDay()];
-                var dayOfMonth = date.getDate();
-                var year = date.getFullYear();
-                var expiration = val["votingExpirationDate"]["date"].substr(0, 19);
-                var begin = val["begin"]["date"].substr(11).substr(0, 8);
-                var end = val["end"]["date"].substr(11).substr(0, 8);
-                var id = val["id"];               
-
-                
-                $("#events").append("<div class='col-md-2 event' id ='option" + i + "' + data=" + id + ">" +
-                    "<div class='col wrapper'>" +
-                    "<h2>" + val["title"] + "</h2>" +
-                    "<h6><p>Voting ends:</p>" +
-                    "<p>" + expiration + "</p></h6>" + 
-                    "</div> </div>"
-                    );
-
-
-                let isexpired = new Date(expiration);
-                var today = new Date();
-                if (isexpired <= today) {
-                    $("#option" + i).append("<h5 class = 'mt-3' > abgelaufen! </h5>");
-                    $("#option" + i).attr("class", "col-md-2 noevent");
-                }
-
-                counter++;
-            
-            
-            })},
+            loadAppointments(response);
+        },
 
                 
         
@@ -66,48 +34,7 @@ $(function() {
                 console.log(self);
                 var appointmentID = self.getAttribute("data")!;
                 console.log(appointmentID);
-                $.ajax({
-                    type: "GET",
-                    url: "backend/serviceHandler.php",
-                    cache: false,
-                    data: {function: "loadOptions", param: appointmentID},   // für die Funktion loadOptions brauchen wir die jeweilige ID des Meetings das wir zuvor angeklickt haben
-                    dataType: "json",
-                    success: function (response) {
-                        console.log("success")
-                        $.each(response, (i: number,val) =>{
-                            var date = new Date(val["date"]["date"]);
-                            console.log("loop");
-                            var month = months[date.getMonth()];
-                            var day = days[date.getDay()];
-                            var dayOfMonth = date.getDate();
-                            var year = date.getFullYear();
-                            var begin = val["begin"]["date"].substr(11).substr(0,8);
-                            var end = val["end"]["date"].substr(11).substr(0,8);
-
-                            $("#appointments").append(
-                                "<div class='col-md'>" +
-                                "<div class='col-md event'>" +
-                                "<div class='col wrapper'>" +
-                                "<h4>" + month + "</h4>" +
-                                "<h3>"+ dayOfMonth +"</h3>" + 
-                                "<p>" + day + "</p>" +
-                                "<p>Begins: " + begin + "</p>" +
-                                "<p>Ends: " + end + "</p>" +
-                                "</div></div>" +
-                                "<div class='row inputs h-20'>" +
-                                "<div class='col-md'><input class='form-check-input' type='checkbox' name = 'type' value='" + i + "'" +  "></div></div></div>"
-                            )
-                            
-                        
-                        })
-                            
-                        $("#appointments").append(slidebutton + commentbar);
-                        $("#lslide").on('click', slidebar)
-                    },
-                    error: function (response){
-                        console.log("failure")
-                    }
-                }),
+                ajaxLoadOptions(appointmentID);
                 setTimeout(() => $("#appointments").show("slide",1000),100);
                 var forum2 = $('#checkboxnamecomment');
                 forum2.submit(function (e) {
@@ -296,40 +223,8 @@ $(function() {
                     success: function (response) {
                         console.log("success2222");
                         console.log(response);
-                        
-                        $.each(response, (i : number,val) => { 
-                            let counter = 1;
-                            //console.log(val[2]);
-                            var date = new Date(val["date"]["date"]);
-                            var month = months[date.getMonth()];
-                            var day = days[date.getDay()];
-                            var dayOfMonth = date.getDate();
-                            var year = date.getFullYear();
-                            var expiration = val["votingExpirationDate"]["date"].substr(0, 19);
-                            var begin = val["begin"]["date"].substr(11).substr(0, 8);
-                            var end = val["end"]["date"].substr(11).substr(0, 8);
-                            var id = val["id"];               
-            
-                            
-                            $("#events").append("<div class='col-md-2 event' id ='option" + i + "' + data=" + id + ">" +
-                                "<div class='col wrapper'>" +
-                                "<h2>" + val["title"] + "</h2>" +
-                                "<h6><p>Voting ends:</p>" +
-                                "<p>" + expiration + "</p></h6>" + 
-                                "</div> </div>"
-                                );
-            
-            
-                            let isexpired = new Date(expiration);
-                            var today = new Date();
-                            if (isexpired <= today) {
-                                $("#option" + i).append("<h5 class = 'mt-3' > abgelaufen! </h5>");
-                                $("#option" + i).attr("class", "col-md-2 noevent");
-                            }
-
-                            counter++;
-                            
-                        })},
+                        loadAppointments(response); //das neu eingefügte Appointment laden
+                        },
                     
                     complete: function () {
                                 $(".event").on('click', e =>{
@@ -338,49 +233,7 @@ $(function() {
                                     console.log(self);
                                     var appointmentID = self.getAttribute("data")!;
                                     console.log(appointmentID);
-                                    $.ajax({
-                                        type: "GET",
-                                        url: "backend/serviceHandler.php",
-                                        cache: false,
-                                        data: {function: "loadOptions",param: appointmentID},   // für die Funktion loadOptions brauchen wir die jeweilige ID des Meetings das wir zuvor angeklickt haben
-                                        dataType: "json",
-                                        success: function (response) {
-                                            console.log("success")
-                                            $.each(response, (i: number,val) =>{
-                                                var date = new Date(val["date"]["date"]);
-                                                console.log("loop");
-                                                var month = months[date.getMonth()];
-                                                var day = days[date.getDay()];
-                                                var dayOfMonth = date.getDate();
-                                                var year = date.getFullYear();
-                                                var begin = val["begin"]["date"].substr(11).substr(0,8);
-                                                var end = val["end"]["date"].substr(11).substr(0,8);
-                    
-                                                $("#appointments").append(
-                                                    "<div class='col-md'>" +
-                                                    "<div class='col-md event'>" +
-                                                    "<div class='col wrapper'>" +
-                                                    "<h4>" + month + "</h4>" +
-                                                    "<h3>"+ dayOfMonth +"</h3>" + 
-                                                    "<p>" + day + "</p>" +
-                                                    "<p>Begins: " + begin + "</p>" +
-                                                    "<p>Ends: " + end + "</p>" +
-                                                    "</div></div>" +
-                                                    "<div class='row inputs h-20'>" +
-                                                    "<div class='col-md'><input class='form-check-input' type='checkbox' name = 'check_list[]' value='termin" + i + "'" +  "></div></div></div>"
-                                                )
-                                                
-                                            
-                                            })
-                                                
-                                            $("#appointments").append(slidebutton + commentbar);
-                                            $("#lslide").on('click', slidebar)
-                                        },
-
-                                        error: function (response){
-                                            console.log("failure")
-                                        }
-                                    }),
+                                    ajaxLoadOptions(appointmentID);
                                     setTimeout(() => $("#appointments").show("slide",1000),100);
                                     })
                     
@@ -392,7 +245,8 @@ $(function() {
                     error: function(e){
                         console.log("failure");
                     },     
-                })}         // richtig
+                })
+            }         // richtig
             });
         });
     });
@@ -415,5 +269,92 @@ function slidebar(){
     $("#appointments").hide("slide", {direction : "left"}, 1000, () =>{
         $("#appointments").empty().append(optionNameInput);
         $("#events").show("slide",1000);
+    })
+}
+
+function loadAppointments(response : any){
+    $.each(response, (i : number,val) => { 
+        let counter = 1;
+        //console.log(val[2]);
+        var date = new Date(val["date"]["date"]);
+        var month = months[date.getMonth()];
+        var day = days[date.getDay()];
+        var dayOfMonth = date.getDate();
+        var year = date.getFullYear();
+        var expiration = val["votingExpirationDate"]["date"].substr(0, 19);
+        var begin = val["begin"]["date"].substr(11).substr(0, 8);
+        var end = val["end"]["date"].substr(11).substr(0, 8);
+        var id = val["id"];               
+
+        
+        $("#events").append("<div class='col-md-2 event' id ='option" + i + "' + data=" + id + ">" +
+            "<div class='col wrapper'>" +
+            "<h2>" + val["title"] + "</h2>" +
+            "<h6><p>Voting ends:</p>" +
+            "<p>" + expiration + "</p></h6>" + 
+            "</div> </div>"
+            );
+
+
+        let isexpired = new Date(expiration);
+        var today = new Date();
+        if (isexpired <= today) {
+            $("#option" + i).append("<h5 class = 'mt-3' > abgelaufen! </h5>");
+            $("#option" + i).attr("class", "col-md-2 noevent");
+        }
+
+        counter++;
+    
+    
+    })
+}
+
+function loadOptions(response : any){
+    $.each(response, (i: number,val) =>{
+        var date = new Date(val["date"]["date"]);
+        console.log("loop");
+        var month = months[date.getMonth()];
+        var day = days[date.getDay()];
+        var dayOfMonth = date.getDate();
+        var year = date.getFullYear();
+        var begin = val["begin"]["date"].substr(11).substr(0,8);
+        var end = val["end"]["date"].substr(11).substr(0,8);
+
+        $("#appointments").append(
+            "<div class='col-md'>" +
+            "<div class='col-md event'>" +
+            "<div class='col wrapper'>" +
+            "<h4>" + month + "</h4>" +
+            "<h3>"+ dayOfMonth +"</h3>" + 
+            "<p>" + day + "</p>" +
+            "<p>Begins: " + begin + "</p>" +
+            "<p>Ends: " + end + "</p>" +
+            "</div></div>" +
+            "<div class='row inputs h-20'>" +
+            "<div class='col-md'><input class='form-check-input' type='checkbox' name = 'type' value='" + i + "'" +  "></div></div></div>"
+        )
+        
+    
+    })
+}
+
+function ajaxLoadOptions(appointmentID : string){
+    $.ajax({
+        type: "GET",
+        url: "backend/serviceHandler.php",
+        cache: false,
+        data: {function: "loadOptions",param: appointmentID},   // für die Funktion loadOptions brauchen wir die jeweilige ID des Meetings das wir zuvor angeklickt haben
+        dataType: "json",
+        success: function (response) {
+            console.log("success")
+            loadOptions(response);
+                
+            $("#appointments").append(slidebutton + commentbar);
+            $("#lslide").on('click', slidebar)
+        },
+
+        error: function (response){
+            console.log("failure")
+        }
     })
 }
