@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+    <script
+    src="https://code.jquery.com/jquery-3.6.0.min.js"
+    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+    crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js" integrity="sha512-uto9mlQzrs59VwILcLiRYeLKPPbS/bT71da/OEBYEwcdNUk8jYIy+D176RYoop1Da+f9mvkYrmj5MCLZWEtQuA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="frontend/css/mystyle.css">
+    <script src="frontend/script/script.js" defer></script>
+    <title>Appointment Finder</title>
+</head>
+<body class="d-flex justify-content-center">
+    <div class="container m-3 d-flex justify-content-center">
+        <div class="events row flex-grow-1" id="events">
+            <div class="col-md-3 d-flex justify-content-between" style="flex-direction: column">
+                
+                <div class="col">
+                    <h2 class="align-self-center">Appointments</h2>
+                    <p class="">Click a meeting to vote for another date</p>
+                </div>
+                <button class = "btn-primary btn-lg" id = "createappointment"> Click here to create an appointment</button>
+                  
+
+                </div>
+             </div>
+
+             <form action = 'checkboxes.php' id = "checkboxnamecomment">
+            <div class="appointments row flex-grow-1" id="appointments">
+                <div class="col-md d-flex justify-content-between" style="flex-direction: column">
+                    <div class="row h-80">
+                        <div class="col">
+                           <h2 class="align-self-center">Options</h2>
+                        </div>
+                    </div>
+                    <div class="row inputs h-20 align-self-bottom">
+                        <div class="col-md">
+                            <i class="bi bi-person-circle m-1"></i><input type="text" placeholder="Name" name = 'check_list[]' >
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+
+               
+               
+                <!--
+                    <div id = "appointment"
+                <div class="col-md">
+                    <div class="row h-80">
+                        <div class="col wrapper">
+                            <h4>Dez</h4>
+                            <h3>23</h3>
+                            <p>Mi</p>
+                            <p>11:40</p>
+                            <p>13:00</p>
+                        </div>
+                    </div>
+                    <div class="row inputs h-20">
+                        <div class="col-md"><input class="form-check-input" type="checkbox" value=""></div>
+                    </div>
+                    
+    
+                </div>
+                <div class="btn btn-primary col-auto p-1" id="lslide">
+                    <i class="bi bi-chevron-left"></i>
+                </div>
+                
+                <div class="row mt-5 comment">
+                    <div class="input-group input-group-lg">
+                        <span class="input-group-text" id="inputGroup-sizing-lg">Comment</span>
+                        <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
+                        <button class="btn btn-outline-secondary bg-primary text-white" type="button" id="submit">Submit</button>
+                    </div>
+                </div>
+            -->
+        </div>
+
+
+        <form id = "createappointmentform" >
+            <div class="form-group">
+              <label for="date" class ="text-white mt-4 mb-2">Datum</label>
+              <input type="date" class="form-control" name="date" id="date" required>
+            </div>
+            <div class="form-group">
+                <label for="meetingid" class ="text-white mt-4 mb-2">MeetingID</label>
+                <input type="number" class="form-control" name="meetingid" id="meetingid" placeholder="12345678" required>
+            </div>
+            <div class="form-group">
+                <label for="title" class ="text-white mt-4 mb-2">Titel</label>
+                <input type="text" class="form-control" name="title" id="title" placeholder="Meeting Nummer 2" required>
+            </div>
+              <div class="form-group">
+                <label for="votingExpirationDate" class ="text-white mt-4 mb-2">Ablaufdatum und Ablaufuhrzeit für Voting</label>
+                <input type="datetime-local" class="form-control" name="votingExpirationDate" id="votingExpirationDate"  required>
+            </div>
+              <div class="form-group">
+                <label for="begin" class ="text-white mt-4 mb-2">Anfangsuhrzeit</label>
+                <input type="datetime-local" class="form-control" name="begin" id="begin" required>
+            </div>
+              <div class="form-group">
+                <label for="end" class ="text-white mt-4 mb-2">Enduhrzeit</label>
+                <input type="datetime-local" class="form-control" name="end" id="end"  required>
+            </div>
+            <div class="form-group">
+                <label for="terminoption1" class ="text-white mt-4 mb-2">Terminoption 1 Anfangsuhrzeit</label>
+                <input type="datetime-local" class="form-control" name="terminoption1begin" id="terminoption1begin"  required>
+            </div>
+            <div class="form-group">
+                <label for="terminoption1" class ="text-white mt-4 mb-2">Terminoption 1 Enduhrzeit</label>
+                <input type="datetime-local" class="form-control" name="terminoption1end" id="terminoption1end"  required>
+            </div>
+            <div class="form-group">
+                <label for="terminoption2" class ="text-white mt-4 mb-2">Terminoption 2 Anfangsuhrzeit</label>
+                <input type="datetime-local" class="form-control" name="terminoption2begin" id="terminoption2begin"  required>
+            </div>
+            <div class="form-group">
+                <label for="terminoption2" class ="text-white mt-4 mb-2">Terminoption 2 Enduhrzeit</label>
+                <input type="datetime-local" class="form-control" name="terminoption2end" id="terminoption2end"  required>
+            </div>
+            <button name = "submit" type="submit" class="btn btn-primary mt-3">Submit</button>
+          </form>
+
+            </div>
+
+            
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+</body>
+</html>

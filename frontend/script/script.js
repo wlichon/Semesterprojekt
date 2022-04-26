@@ -2,7 +2,7 @@
 var months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 var days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 var slidebutton = "<div class='btn btn-primary col-auto p-1' id='lslide'><i class='bi bi-chevron-left'></i></div>";
-var commentbar = "<div class='row mt-5 comment'><div class='input-group input-group-lg'><span class='input-group-text' id='inputGroup-sizing-lg'>Comment</span><input type='text' name='check_list[]' class='form-control' aria-label='Sizing example input' aria-describedby='inputGroup-sizing-lg'><button class='btn btn-outline-secondary bg-primary text-white' type='submit' name='submitnamecommentcheckbox'>Submit</button></div></div>";
+var commentbar = "<div class='row mt-5 comment'><div class='input-group input-group-lg'><span class='input-group-text' id='inputGroup-sizing-lg'>Comment</span><input type='text' id = 'comment' class='form-control' aria-label='Sizing example input' aria-describedby='inputGroup-sizing-lg'><button class='btn btn-outline-secondary bg-primary text-white' type='submit' name='submitnamecommentcheckbox'>Submit</button></div></div>";
 $(function () {
     $("#appointments").hide();
     $("#events").hide();
@@ -81,7 +81,7 @@ $(function () {
                                     "<p>Ends: " + end + "</p>" +
                                     "</div></div>" +
                                     "<div class='row inputs h-20'>" +
-                                    "<div class='col-md'><input class='form-check-input' type='checkbox' name = 'check_list[]' value='termin" + i + "'" + "></div></div></div>");
+                                    "<div class='col-md'><input class='form-check-input' type='checkbox' name = 'type' value='" + i + "'" + "></div></div></div>");
                             });
                             $("#appointments").append(slidebutton + commentbar);
                             $("#lslide").on('click', slidebar);
@@ -91,6 +91,47 @@ $(function () {
                         }
                     }),
                         setTimeout(function () { return $("#appointments").show("slide", 1000); }, 100);
+                    var forum2 = $('#checkboxnamecomment');
+                    forum2.submit(function (e) {
+                        e.preventDefault();
+                        console.log(appointmentID);
+                        var termin1 = 0;
+                        var termin2 = 0;
+                        var array = [];
+                        var checkboxing;
+                        HTMLInputElement: var checkbox = $("input:checkbox[name=type]:checked");
+                        $(checkbox).each(function () {
+                            checkboxing = $(this).val();
+                            //alert(checkboxing);
+                            array.push(checkboxing);
+                        });
+                        if (array[0] == 0) {
+                            termin1 = 1;
+                        }
+                        if (array[0] == 1) {
+                            termin2 = 1;
+                        }
+                        if (array[1] == 1) {
+                            termin2 = 1;
+                        }
+                        var personname = $('#personname').val();
+                        var comment = $('#comment').val();
+                        $.ajax({
+                            type: "GET",
+                            url: "backend/serviceHandler.php",
+                            data: { function: "voteForAppointment", meetingnummer: appointmentID, name: personname, kommentar: comment, termin1auswahl: termin1, termin2auswahl: termin2 },
+                            success: function (data) {
+                                console.log("hallo");
+                            },
+                            error: function (data) {
+                                console.log("hallo2");
+                            }
+                        });
+                        console.log(termin1);
+                        console.log(termin2);
+                        console.log(personname);
+                        console.log(comment);
+                    });
                 });
             });
             $("#events").show("slide", 1000);
@@ -109,6 +150,64 @@ $(function () {
         $("#events").hide("slide", 1000);
         $("#createappointmentform").show("slide", 1000);
     });
+    /*
+        var forum2 = $('#checkboxnamecomment');
+        forum2.submit(function (e) {
+            e.preventDefault();
+            var self = e.currentTarget;
+            console.log(self);
+            var parent = self.parentElement;
+            console.log(parent);
+            var appointmentID = parent!.getAttribute("data")!;
+            console.log(appointmentID);
+            let termin1:number = 0;
+            let termin2:number = 0;
+            let array: Array <number> = [];
+            var checkboxing: number;
+            HTMLInputElement: var checkbox = $("input:checkbox[name=type]:checked");
+            $(checkbox).each(function() {
+                    checkboxing = $(this).val() as number;
+                    //alert(checkboxing);
+                    array.push(checkboxing);
+            });
+    
+            if (array[0] == 0) {
+                termin1 = 1;
+            }
+    
+            if (array[0] == 1) {
+                termin2 = 1;
+            }
+    
+            if (array[1] == 1) {
+                termin2 = 1;
+            }
+    
+            var personname = $('#personname').val();
+            var comment = $('#comment').val();
+    
+            $.ajax({
+                type: "GET",
+                url: "backend/serviceHandler.php",
+                data: {function: "voteForAppointment", name: personname, kommentar: comment, termin1auswahl: termin1, termin2auswahl: termin2},
+    
+                success: function (data) {
+    
+                },
+    
+                error: function (data) {
+    
+                }
+            })
+    
+    
+            console.log(termin1);
+            console.log(termin2);
+            console.log(personname);
+            console.log(comment);
+        })
+    
+    */
     var frm = $('#createappointmentform');
     frm.submit(function (e) {
         e.preventDefault();
