@@ -61,7 +61,7 @@ $(function () {
                             url: "backend/serviceHandler.php",
                             data: { function: "voteForAppointment", meetingnummer: appointmentID, name: personname, kommentar: comment, termin1auswahl: termin1, termin2auswahl: termin2 },
                             success: function (data) {
-                                console.log("hallo");
+                                slidebar();
                             },
                             error: function (data) {
                                 console.log("hallo2");
@@ -160,6 +160,8 @@ $(function () {
         var end = $("#end").val();
         var terminoption1begin = $("#terminoption1begin").val();
         var terminoption1end = $("#terminoption1end").val();
+        var terminoption1id = $("#terminoption1id").val();
+        var terminoption2id = $("#terminoption2id").val();
         var terminoption2begin = $("#terminoption2begin").val();
         var terminoption2end = $("#terminoption2end").val();
         console.log(date, meetingID, title, votingExpirationDate, begin, end, terminoption1begin, terminoption1end, terminoption2begin, terminoption2end);
@@ -168,9 +170,45 @@ $(function () {
             url: "backend/serviceHandler.php",
             data: { function: "createAppointmentWithOptions", param1: date,
                 param2: meetingID, param3: title, param4: votingExpirationDate, param5: begin, param6: end, param7: terminoption1begin,
-                param8: terminoption1end, param9: terminoption2begin, param10: terminoption2end },
+                param8: terminoption1end, param9: terminoption2begin, param10: terminoption2end, param11: terminoption1id, param12: terminoption2id },
             success: function (data) {
-                alert("Diese MeetingID ist leider schon vergeben! Bitte wählen Sie eine andere MeetingID.");
+                $("#createappointmentform").hide("slide", 1000);
+                $("#events").empty();
+                var button = "<div class='col-md-3 d-flex justify-content-between' style='flex-direction: column'> <div class='col'> <h2 class='align-self-center'>Appointments</h2><p class=''>Click a meeting to vote for another date</p> </div><button class = 'btn-primary btn-lg' id = 'createappointment'> Click here to create an appointment</button></div></div>";
+                $('#events').append(button);
+                $("#createappointment").on("click", function () {
+                    $("#appointments").hide("slide", 1000);
+                    $("#events").hide("slide", 1000);
+                    $("#createappointmentform").show("slide", 1000);
+                });
+                $.ajax({
+                    type: "GET",
+                    url: "backend/serviceHandler.php",
+                    cache: false,
+                    data: { function: "loadAppointments" },
+                    dataType: "json",
+                    success: function (response) {
+                        console.log("success2222");
+                        console.log(response);
+                        loadAppointments(response); //das neu eingefügte Appointment laden
+                    },
+                    complete: function () {
+                        $(".event").on('click', function (e) {
+                            var self = e.currentTarget; // Element was das Klick getriggert hat
+                            $("#events").hide("slide", { direction: "left" }, 1000, function () {
+                                console.log(self);
+                                var appointmentID = self.getAttribute("data");
+                                console.log(appointmentID);
+                                ajaxLoadOptions(appointmentID);
+                                setTimeout(function () { return $("#appointments").show("slide", 1000); }, 100);
+                            });
+                        });
+                        $("#events").show("slide", 1000);
+                    },
+                    error: function (e) {
+                        console.log("failure");
+                    },
+                });
             },
             error: function (data) {
                 $("#createappointmentform").hide("slide", 1000);
