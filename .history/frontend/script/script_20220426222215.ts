@@ -32,10 +32,9 @@ $(function() {
                 console.log(appointmentID);
                 ajaxLoadOptions(appointmentID);
                 setTimeout(() => $("#appointments").show("slide",1000),100);
-                var forum2 = $('#checkboxnamecomment');
+                var forum2 = $('#checkboxnamecomment') as HTMLInputElement;
                 forum2.submit(function (e) {
                     e.preventDefault();
-                    e.stopImmediatePropagation();
                     console.log(appointmentID);
                     let termin1:number = 0;
                     let termin2:number = 0;
@@ -69,9 +68,7 @@ $(function() {
                         data: {function: "voteForAppointment", meetingnummer: appointmentID, name: personname, kommentar: comment, termin1auswahl: termin1, termin2auswahl: termin2},
     
                         success: function (data) {
-                            var dirtyFormID = 'checkboxnamecomment';
-                            var resetForm = <HTMLFormElement>document.getElementById(dirtyFormID);
-                            resetForm.reset();
+                            $("#checkboxnamecomment")[0].reset();
                             slidebar();
                         },
     
@@ -80,10 +77,10 @@ $(function() {
                         }
                     })
     
-                    console.log(termin1);
-                    console.log(termin2);
-                    console.log(personname);
-                    console.log(comment);
+                    //console.log(termin1);
+                    //console.log(termin2);
+                    //console.log(personname);
+                    //console.log(comment);
         })
             })
             

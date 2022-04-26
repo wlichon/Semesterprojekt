@@ -35,7 +35,7 @@ $(function() {
                 var forum2 = $('#checkboxnamecomment');
                 forum2.submit(function (e) {
                     e.preventDefault();
-                    e.stopImmediatePropagation();
+                    stopImmediatePropagation
                     console.log(appointmentID);
                     let termin1:number = 0;
                     let termin2:number = 0;

@@ -16,6 +16,10 @@ $(function() {
         data: {function: "loadAppointments"},   // kein Parameter nötig, da alle Meetings geladen werden
         dataType: "json",
         success: function (response) {
+        // bei sucess liefert loadAppointments ein Array mit den ganzen Appointments in dem Format:
+        //  Appointment("25-06-2027", "Meeting4", "22-05-2025 19:30:00", "18:00", "18:30", [2, 3]) also:
+        // Appointment("Tag-Monat-Jahr", "MeetingNummer", "ExpirationDate", "UhrzeitBeginn", "Uhrzeitende", "OptionsID");
+        // Appointment ($date,$title,$votingExpirationDate,$begin,$end,$optionIDs)3222
             console.log("success");
             console.log(response);
             loadAppointments(response);
@@ -35,7 +39,6 @@ $(function() {
                 var forum2 = $('#checkboxnamecomment');
                 forum2.submit(function (e) {
                     e.preventDefault();
-                    e.stopImmediatePropagation();
                     console.log(appointmentID);
                     let termin1:number = 0;
                     let termin2:number = 0;
@@ -69,9 +72,6 @@ $(function() {
                         data: {function: "voteForAppointment", meetingnummer: appointmentID, name: personname, kommentar: comment, termin1auswahl: termin1, termin2auswahl: termin2},
     
                         success: function (data) {
-                            var dirtyFormID = 'checkboxnamecomment';
-                            var resetForm = <HTMLFormElement>document.getElementById(dirtyFormID);
-                            resetForm.reset();
                             slidebar();
                         },
     
@@ -112,6 +112,69 @@ $(function() {
         $("#events").hide("slide", 1000);
         $("#createappointmentform").show("slide", 1000);
     })
+
+
+/*
+    var forum2 = $('#checkboxnamecomment');
+    forum2.submit(function (e) {
+        e.preventDefault();
+        var self = e.currentTarget;
+        console.log(self);
+        var parent = self.parentElement;  
+        console.log(parent);
+        var appointmentID = parent!.getAttribute("data")!;
+        console.log(appointmentID);
+        let termin1:number = 0;
+        let termin2:number = 0;
+        let array: Array <number> = [];
+        var checkboxing: number;
+        HTMLInputElement: var checkbox = $("input:checkbox[name=type]:checked");
+        $(checkbox).each(function() {
+                checkboxing = $(this).val() as number;
+                //alert(checkboxing);
+                array.push(checkboxing);   
+        });
+
+        if (array[0] == 0) {
+            termin1 = 1;
+        }
+
+        if (array[0] == 1) {
+            termin2 = 1;
+        }
+
+        if (array[1] == 1) {
+            termin2 = 1;
+        }
+
+        var personname = $('#personname').val();
+        var comment = $('#comment').val();
+
+        $.ajax({
+            type: "GET",
+            url: "backend/serviceHandler.php",
+            data: {function: "voteForAppointment", name: personname, kommentar: comment, termin1auswahl: termin1, termin2auswahl: termin2},
+
+            success: function (data) {
+
+            },
+
+            error: function (data) {
+
+            }
+        })
+
+
+        console.log(termin1);
+        console.log(termin2);
+        console.log(personname);
+        console.log(comment);
+    })
+
+*/
+
+
+
 
 
     var frm = $('#createappointmentform');
