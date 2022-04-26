@@ -97,7 +97,7 @@ class DataHandler
             $statement->execute();
         }
 
-        //comment und name eintragen in neue tabelle
+        //comment
     }
 
     public function loadOptions($id)

@@ -96,8 +96,6 @@ class DataHandler
             $statement->bind_param("ii", $meetingID, $null);
             $statement->execute();
         }
-
-        //comment und name eintragen in neue tabelle
     }
 
     public function loadOptions($id)

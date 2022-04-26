@@ -92,12 +92,10 @@ class DataHandler
         if ($termin2 == 1) {
             $sql = "UPDATE Options SET voteCount = voteCount + 1 WHERE fk_a_id=? and optionsnummer=?;";
             $statement = $this->conn->prepare($sql);
-            $eins = 1;
+            $null = 0;
             $statement->bind_param("ii", $meetingID, $null);
             $statement->execute();
         }
-
-        //comment und name eintragen in neue tabelle
     }
 
     public function loadOptions($id)
