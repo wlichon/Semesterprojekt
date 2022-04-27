@@ -79,14 +79,14 @@ $(function() {
                         type: "GET",
                         url: "backend/serviceHandler.php",
                         data: {function: "voteForAppointment", meetingnummer: appointmentID, name: personname, kommentar: comment, termin1auswahl: termin1, termin2auswahl: termin2},
-                        dataType: "test",
+    
                         success: function (data) {
                             console.log("zeile 84");
-                        },
-                        
-                        error: function (data) {
                             $('#checkboxnamecomment').off('submit');
                             slidebar();
+                        },
+    
+                        error: function (data) {
                             console.log("hallo2");
                         }
                     })

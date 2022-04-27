@@ -82,11 +82,11 @@ $(function() {
                         dataType: "test",
                         success: function (data) {
                             console.log("zeile 84");
-                        },
-                        
-                        error: function (data) {
                             $('#checkboxnamecomment').off('submit');
                             slidebar();
+                        },
+    
+                        error: function (data) {
                             console.log("hallo2");
                         }
                     })

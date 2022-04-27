@@ -34,7 +34,7 @@ $(function () {
                     //var resetForm = <HTMLFormElement>document.getElementById(dirtyFormID);
                     //resetForm.reset();
                     console.log("das ist die appointmentid außerhalb der funktion2:", appointmentID);
-                    forum2.submit(function (e) {
+                    forum2.on("submit", function (e) {
                         console.log("das ist die appointmentid in der funktion:", appointmentID);
                         //e.stopImmediatePropagation();
                         e.preventDefault();
@@ -63,11 +63,13 @@ $(function () {
                             type: "GET",
                             url: "backend/serviceHandler.php",
                             data: { function: "voteForAppointment", meetingnummer: appointmentID, name: personname, kommentar: comment, termin1auswahl: termin1, termin2auswahl: termin2 },
+                            dataType: "test",
                             success: function (data) {
-                                $('#checkboxnamecomment').unbind('submit');
-                                slidebar();
+                                console.log("zeile 84");
                             },
                             error: function (data) {
+                                $('#checkboxnamecomment').off('submit');
+                                slidebar();
                                 console.log("hallo2");
                             }
                         });
