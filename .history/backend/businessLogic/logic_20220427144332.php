@@ -32,6 +32,7 @@ class Logic
     function insertIntoDB($function, $date, $meetingID, $title, $votingExpirationDate, $begin, $end, $terminoption1begin, $terminoption1end, $terminoption2begin, $terminoption2end, $terminoption1id, $terminoption2id)
     {
         $this->dh->createAppointments($meetingID, $title, $votingExpirationDate, $begin, $end, $date);
+        $date, $optionbegin, $optionend, $meetingID, $optionsnummer, $optionID
         $this->dh->createOptions($date, $terminoption1begin, $terminoption1end, $meetingID, 0, $terminoption1id);
         $this->dh->createOptions($date, $terminoption2begin, $terminoption2end, $meetingID, 1, $terminoption2id);
     }

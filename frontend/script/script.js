@@ -101,9 +101,9 @@ $(function () {
         var votingExpirationDate = $("#votingExpirationDate").val();
         var begin = $("#begin").val();
         var end = $("#end").val();
+        var terminoption1id = $("#terminoption1id").val();
         var terminoption1begin = $("#terminoption1begin").val();
         var terminoption1end = $("#terminoption1end").val();
-        var terminoption1id = $("#terminoption1id").val();
         var terminoption2id = $("#terminoption2id").val();
         var terminoption2begin = $("#terminoption2begin").val();
         var terminoption2end = $("#terminoption2end").val();

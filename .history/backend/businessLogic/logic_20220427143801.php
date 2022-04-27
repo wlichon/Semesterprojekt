@@ -29,11 +29,11 @@ class Logic
         return $res;
     }
 
-    function insertIntoDB($function, $date, $meetingID, $title, $votingExpirationDate, $begin, $end, $terminoption1begin, $terminoption1end, $terminoption2begin, $terminoption2end, $terminoption1id, $terminoption2id)
+    function insertIntoDB($function, $param1, $param2, $param3, $param4, $param5, $param6, $param7, $param8, $param9, $param10, $param11, $param12)
     {
-        $this->dh->createAppointments($meetingID, $title, $votingExpirationDate, $begin, $end, $date);
-        $this->dh->createOptions($date, $terminoption1begin, $terminoption1end, $meetingID, 0, $terminoption1id);
-        $this->dh->createOptions($date, $terminoption2begin, $terminoption2end, $meetingID, 1, $terminoption2id);
+        $this->dh->createAppointments($param2, $param3, $param4, $param5, $param6, $param1);
+        $this->dh->createOptions($param1, $param7, $param8, $param2, 0, $param11);
+        $this->dh->createOptions($param1, $param9, $param10, $param2, 1, $param12);
     }
 
     function insertIntoDB2($meetingID, $name, $comment, $termin1, $termin2, $optionID)

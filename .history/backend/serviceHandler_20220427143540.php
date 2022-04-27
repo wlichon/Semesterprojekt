@@ -14,14 +14,14 @@ if (isset($_GET["param1"])) {
     $votingExpirationDate = $_GET["param4"];
     $begin = $_GET["param5"];
     $end = $_GET["param6"];
-    $terminoption1begin = $_GET["param7"];
-    $terminoption1end = $_GET["param8"];
-    $terminoption2begin = $_GET["param9"];
-    $terminoption2end = $_GET["param10"];
-    $terminoption1id = $_GET["param11"];
-    $terminoption2id = $_GET["param12"];
+    $param7 = $_GET["param7"];
+    $param8 = $_GET["param8"];
+    $param9 = $_GET["param9"];
+    $param10 = $_GET["param10"];
+    $param11 = $_GET["param11"];
+    $param12 = $_GET["param12"];
     $logic = new Logic($conn);
-    $logic->insertIntoDB($function, $date, $meetingID, $title, $votingExpirationDate, $begin, $end, $terminoption1begin, $terminoption1end, $terminoption2begin, $terminoption2end, $terminoption1id, $terminoption2id);
+    $logic->insertIntoDB($function, $param1, $param2, $param3, $param4, $param5, $param6, $param7, $param8, $param8, $param9, $param10, $param11, $param12);
 }
 
 if (isset($_GET["meetingnummer"])) {

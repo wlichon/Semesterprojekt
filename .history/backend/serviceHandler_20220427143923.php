@@ -21,7 +21,7 @@ if (isset($_GET["param1"])) {
     $terminoption1id = $_GET["param11"];
     $terminoption2id = $_GET["param12"];
     $logic = new Logic($conn);
-    $logic->insertIntoDB($function, $date, $meetingID, $title, $votingExpirationDate, $begin, $end, $terminoption1begin, $terminoption1end, $terminoption2begin, $terminoption2end, $terminoption1id, $terminoption2id);
+    $logic->insertIntoDB($function, $date, $meetingID, $title, $votingExpirationDate, $begin, $end, $terminoption1begin, $terminoption1end, $terminoption2begin, $terminoption2end, $terminoption1id, $param11, $param12);
 }
 
 if (isset($_GET["meetingnummer"])) {
