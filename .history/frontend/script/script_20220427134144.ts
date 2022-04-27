@@ -24,8 +24,6 @@ $(function() {
                 
         
         complete: function () {
-
-            //AB DA AN ALLES!!
             $(".event").on('click', e =>{
             var self = e.currentTarget;         // Element was das Klick getriggert hat
             $("#events").hide("slide", {direction : "left"}, 1000, () =>{

@@ -82,18 +82,17 @@ class DataHandler
 
     function voteForAppointment($meetingID, $name, $comment, $termin1, $termin2, $optionID)
     {
-        $eins = 1;
-        $null = 0;
-
         if ($termin1 == 1) {
             $sql = "UPDATE Options SET voteCount = voteCount + 1 WHERE fk_a_id=? and optionsnummer=?;";
             $statement = $this->conn->prepare($sql);
-            $statement->bind_param("ii", $meetingID, $eins);
+            $null = 0;
+            $statement->bind_param("ii", $meetingID, $null);
             $statement->execute();
         }
         if ($termin2 == 1) {
             $sql = "UPDATE Options SET voteCount = voteCount + 1 WHERE fk_a_id=? and optionsnummer=?;";
             $statement = $this->conn->prepare($sql);
+            $eins = 1;
             $statement->bind_param("ii", $meetingID, $null);
             $statement->execute();
         }

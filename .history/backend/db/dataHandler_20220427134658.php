@@ -88,7 +88,7 @@ class DataHandler
         if ($termin1 == 1) {
             $sql = "UPDATE Options SET voteCount = voteCount + 1 WHERE fk_a_id=? and optionsnummer=?;";
             $statement = $this->conn->prepare($sql);
-            $statement->bind_param("ii", $meetingID, $eins);
+            $statement->bind_param("ii", $meetingID, );
             $statement->execute();
         }
         if ($termin2 == 1) {

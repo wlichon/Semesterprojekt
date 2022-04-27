@@ -19,6 +19,7 @@ $(function () {
             loadAppointments(response);
         },
         complete: function () {
+            //AB DA AN ALLES!!
             $(".event").on('click', function (e) {
                 var self = e.currentTarget; // Element was das Klick getriggert hat
                 $("#events").hide("slide", { direction: "left" }, 1000, function () {
