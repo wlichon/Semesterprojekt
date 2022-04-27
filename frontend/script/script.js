@@ -238,10 +238,10 @@ function loadAppointments(response) {
             "<h2>" + val["title"] + "</h2>" +
             "<h6><p>Voting ends:</p>" +
             "<p>" + expiration + "</p></h6>" +
-            '</div><i class="bi bi-backspace-fill" id="remove' + i + '""></i> </div>');
-        $("#option" + i).on('click', function () {
-            var appointment = $(this);
-            var id = $(this).attr("data");
+            '</div><i class="bi bi-backspace-fill p-1" id="remove' + i + '" data=' + id + '></i> </div>');
+        $("#remove" + i).on('click', function () {
+            var deleteButton = $(this);
+            var id = deleteButton.attr("data");
             console.log(id);
             $.ajax({
                 type: "GET",
@@ -251,7 +251,7 @@ function loadAppointments(response) {
                 dataType: "text",
                 success: function (response) {
                     console.log("delete success");
-                    appointment.remove();
+                    deleteButton.parent().remove();
                 },
                 error: function (response) {
                     console.log("delete failure");

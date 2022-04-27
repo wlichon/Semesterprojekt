@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Erstellungszeit: 27. Apr 2022 um 22:06
+-- Erstellungszeit: 27. Apr 2022 um 22:31
 -- Server-Version: 10.4.21-MariaDB
 -- PHP-Version: 8.0.12
 
@@ -36,6 +36,16 @@ CREATE TABLE `appointment` (
   `date` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Daten für Tabelle `appointment`
+--
+
+INSERT INTO `appointment` (`a_id`, `title`, `votingExpirationDate`, `begin`, `end`, `date`) VALUES
+(1, 'Meeting', '2022-04-26 11:30:00', '2022-04-27 15:30:00', '2022-04-27 18:30:30', '2022-04-27 11:30:30'),
+(2, 'Meeting2', '2022-04-26 14:00:00', '2022-04-27 09:00:00', '2022-04-27 13:30:00', '2022-04-27 11:32:39'),
+(3, 'Meeting3', '2022-03-24 15:50:37', '2022-03-24 08:00:00', '2022-03-24 10:50:00', '2022-03-24 15:50:37'),
+(4, 'Meeting4', '2022-07-23 15:30:00', '2022-07-25 09:50:00', '2022-07-27 15:50:00', '2022-07-27 15:50:37');
+
 -- --------------------------------------------------------
 
 --
@@ -64,6 +74,16 @@ CREATE TABLE `options` (
   `optionsnummer` int(11) NOT NULL,
   `fk_a_id` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Daten für Tabelle `options`
+--
+
+INSERT INTO `options` (`o_id`, `voteCount`, `date`, `begin`, `end`, `optionsnummer`, `fk_a_id`) VALUES
+(1, 0, '2022-04-27 12:04:18', '2022-04-27 12:04:18', '2022-04-27 18:04:18', 0, 1),
+(2, 0, '2022-04-24 14:50:19', '2022-04-24 12:50:19', '2022-04-24 19:19:00', 0, 1),
+(3, 0, '2022-05-25 15:26:03', '2022-05-25 08:30:00', '2022-05-24 15:00:00', 0, 2),
+(4, 0, '2022-03-24 15:26:03', '2022-03-24 15:00:00', '2022-04-24 20:00:00', 0, 1);
 
 --
 -- Indizes der exportierten Tabellen
