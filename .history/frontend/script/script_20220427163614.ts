@@ -79,7 +79,7 @@ $(function() {
                         data: {function: "voteForAppointment", meetingnummer: appointmentID, name: personname, kommentar: comment, termin1auswahl: termin1, termin2auswahl: termin2},
     
                         success: function (data) {
-                            $('#checkboxnamecomment').unbind('submit');
+                            
                             slidebar();
                         },
     

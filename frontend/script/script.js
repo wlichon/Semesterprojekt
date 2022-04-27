@@ -36,8 +36,7 @@ $(function () {
                     console.log("das ist die appointmentid außerhalb der funktion2:", appointmentID);
                     forum2.submit(function (e) {
                         console.log("das ist die appointmentid in der funktion:", appointmentID);
-                        console.log($('#personname').val());
-                        e.stopImmediatePropagation();
+                        //e.stopImmediatePropagation();
                         e.preventDefault();
                         var termin1 = 0;
                         var termin2 = 0;
@@ -65,9 +64,7 @@ $(function () {
                             url: "backend/serviceHandler.php",
                             data: { function: "voteForAppointment", meetingnummer: appointmentID, name: personname, kommentar: comment, termin1auswahl: termin1, termin2auswahl: termin2 },
                             success: function (data) {
-                                //var dirtyFormID = 'checkboxnamecomment';
-                                //var resetForm = <HTMLFormElement>document.getElementById(dirtyFormID);
-                                //resetForm.reset();
+                                $('#checkboxnamecomment').unbind('submit');
                                 slidebar();
                             },
                             error: function (data) {

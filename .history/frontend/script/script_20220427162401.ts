@@ -45,6 +45,7 @@ $(function() {
 
                 forum2.submit(function (e) {
                     console.log("das ist die appointmentid in der funktion:", appointmentID);
+                    console.log($('#personname').val());
                     //e.stopImmediatePropagation();
                     e.preventDefault();
                     let termin1:number = 0;
@@ -79,7 +80,9 @@ $(function() {
                         data: {function: "voteForAppointment", meetingnummer: appointmentID, name: personname, kommentar: comment, termin1auswahl: termin1, termin2auswahl: termin2},
     
                         success: function (data) {
-                            $('#checkboxnamecomment').unbind('submit');
+                            //var dirtyFormID = 'checkboxnamecomment';
+                            //var resetForm = <HTMLFormElement>document.getElementById(dirtyFormID);
+                            //resetForm.reset();
                             slidebar();
                         },
     
