@@ -121,6 +121,7 @@ $(function() {
         $("#appointments").hide("slide", 1000);
         $("#events").hide("slide", 1000);
         $("#createappointmentform").show("slide", 1000);
+
     })
 
 
