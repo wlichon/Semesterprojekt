@@ -44,8 +44,3 @@ body{
 .noevent:hover{
     pointer-events: none;
 }
-
-.bi-backspace-fill:hover{
-    cursor:pointer;
-    background-color: red;
-}

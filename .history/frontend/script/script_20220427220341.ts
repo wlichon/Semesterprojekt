@@ -300,7 +300,7 @@ function loadAppointments(response : any){
                 dataType: "text",
                 success: function (response) {
                     console.log("delete success")
-                    appointment.remove();
+                    $(this).remove();
                 },
         
                 error: function (response){

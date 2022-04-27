@@ -238,7 +238,26 @@ function loadAppointments(response) {
             "<h2>" + val["title"] + "</h2>" +
             "<h6><p>Voting ends:</p>" +
             "<p>" + expiration + "</p></h6>" +
-            "</div> </div>");
+            '</div><i class="bi bi-backspace-fill" id="remove' + i + '""></i> </div>');
+        $("#option" + i).on('click', function () {
+            var appointment = $(this);
+            var id = $(this).attr("data");
+            console.log(id);
+            $.ajax({
+                type: "GET",
+                url: "backend/serviceHandler.php",
+                cache: false,
+                data: { function: "deleteAppointment", param: id },
+                dataType: "text",
+                success: function (response) {
+                    console.log("delete success");
+                    appointment.remove();
+                },
+                error: function (response) {
+                    console.log("delete failure");
+                }
+            });
+        });
         var isexpired = new Date(expiration);
         var today = new Date();
         if (isexpired <= today) {
@@ -288,4 +307,6 @@ function ajaxLoadOptions(appointmentID) {
             console.log("failure");
         }
     });
+}
+function reloadAfterDelete() {
 }

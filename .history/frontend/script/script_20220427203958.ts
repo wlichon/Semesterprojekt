@@ -284,27 +284,27 @@ function loadAppointments(response : any){
             "<h2>" + val["title"] + "</h2>" +
             "<h6><p>Voting ends:</p>" +
             "<p>" + expiration + "</p></h6>" + 
-            '</div><i class="bi bi-backspace-fill" id="remove'+ i +'""></i> </div>'
+            '</div>\'<i class="bi bi-backspace-fill" id="remove'+ i +'""></i>\' </div>'
             
             );
 
         $("#option"+i).on('click',function(){
-            let appointment = $(this);
-            let id = $(this).attr("data");
-            console.log(id);
             $.ajax({
                 type: "GET",
                 url: "backend/serviceHandler.php",
                 cache: false,
                 data: {function: "deleteAppointment",param: id},   // für die Funktion loadOptions brauchen wir die jeweilige ID des Meetings das wir zuvor angeklickt haben
-                dataType: "text",
+                dataType: "json",
                 success: function (response) {
-                    console.log("delete success")
-                    appointment.remove();
+                    console.log("success")
+                    loadOptions(response);
+                        
+                    $("#appointments").append(slidebutton + commentbar);
+                    $("#lslide").on('click', slidebar)
                 },
         
                 error: function (response){
-                    console.log("delete failure")
+                    console.log("failure")
                 }
             })
         })
@@ -369,8 +369,4 @@ function ajaxLoadOptions(appointmentID : string){
             console.log("failure")
         }
     })
-}
-
-function reloadAfterDelete(){
-
 }

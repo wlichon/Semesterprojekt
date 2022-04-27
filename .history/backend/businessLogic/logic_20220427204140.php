@@ -22,7 +22,7 @@ class Logic
                 $res = $this->dh->loadOptions($param);
                 break;
             case "deleteAppointment":
-                $res = $this->dh->deleteAppointment($param);
+                $this->dh->deleteAppointment($param);
                 break;
 
             default:

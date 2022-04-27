@@ -109,9 +109,8 @@ class DataHandler
     }
 
     function deleteAppointment($id){
-        $sql = "DELETE FROM Appointment WHERE a_id=$id";
-        $res = $this->conn->query($sql);
-        return $res;
+        $sql = "DELETE FROM MyGuests WHERE id=$id";
+        $this->conn->query($sql);
     }
 
 

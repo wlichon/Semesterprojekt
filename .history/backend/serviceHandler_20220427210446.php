@@ -6,7 +6,7 @@ $param = "";
 $function = "";
 
 $function = "deleteAppointment";
-$param = 2;
+$param = 1234;
 
 isset($_GET["function"]) ? $function = $_GET["function"] : false;
 isset($_GET["param"]) ? $param = $_GET["param"] : false;

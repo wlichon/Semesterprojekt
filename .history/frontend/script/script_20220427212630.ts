@@ -289,8 +289,7 @@ function loadAppointments(response : any){
             );
 
         $("#option"+i).on('click',function(){
-            let appointment = $(this);
-            let id = $(this).attr("data");
+            id = $(this).attr("data");
             console.log(id);
             $.ajax({
                 type: "GET",
@@ -300,7 +299,7 @@ function loadAppointments(response : any){
                 dataType: "text",
                 success: function (response) {
                     console.log("delete success")
-                    appointment.remove();
+                    $(this).remove();
                 },
         
                 error: function (response){
