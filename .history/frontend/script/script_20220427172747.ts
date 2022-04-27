@@ -81,7 +81,7 @@ $(function() {
                         data: {function: "voteForAppointment", meetingnummer: appointmentID, name: personname, kommentar: comment, termin1auswahl: termin1, termin2auswahl: termin2},
     
                         success: function (data) {
-                            console.log("zeile 84");
+                            console.log("zeile 84")
                             $('#checkboxnamecomment').unbind('submit');
                             slidebar();
                         },

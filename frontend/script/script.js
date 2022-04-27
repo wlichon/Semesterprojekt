@@ -1,4 +1,3 @@
-"use strict";
 var months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 var days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 var slidebutton = "<div class='btn btn-primary col-auto p-1' id='lslide'><i class='bi bi-chevron-left'></i></div>";
@@ -11,7 +10,7 @@ $(function () {
         type: "GET",
         url: "backend/serviceHandler.php",
         cache: false,
-        data: { function: "loadAppointments" },
+        data: { "function": "loadAppointments" },
         dataType: "json",
         success: function (response) {
             console.log("success");
@@ -62,8 +61,9 @@ $(function () {
                         $.ajax({
                             type: "GET",
                             url: "backend/serviceHandler.php",
-                            data: { function: "voteForAppointment", meetingnummer: appointmentID, name: personname, kommentar: comment, termin1auswahl: termin1, termin2auswahl: termin2 },
+                            data: { "function": "voteForAppointment", meetingnummer: appointmentID, name: personname, kommentar: comment, termin1auswahl: termin1, termin2auswahl: termin2 },
                             success: function (data) {
+                                console.log("zeile 84");
                                 $('#checkboxnamecomment').unbind('submit');
                                 slidebar();
                             },
@@ -114,7 +114,7 @@ $(function () {
         $.ajax({
             type: "GET",
             url: "backend/serviceHandler.php",
-            data: { function: "createAppointmentWithOptions", param1: date,
+            data: { "function": "createAppointmentWithOptions", param1: date,
                 param2: meetingID, param3: title, param4: votingExpirationDate, param5: begin, param6: end, param7: terminoption1begin,
                 param8: terminoption1end, param9: terminoption2begin, param10: terminoption2end, param11: terminoption1id, param12: terminoption2id },
             success: function (data) {
@@ -131,7 +131,7 @@ $(function () {
                     type: "GET",
                     url: "backend/serviceHandler.php",
                     cache: false,
-                    data: { function: "loadAppointments" },
+                    data: { "function": "loadAppointments" },
                     dataType: "json",
                     success: function (response) {
                         console.log("success2222");
@@ -154,7 +154,7 @@ $(function () {
                     },
                     error: function (e) {
                         console.log("failure");
-                    },
+                    }
                 });
             },
             error: function (data) {
@@ -171,7 +171,7 @@ $(function () {
                     type: "GET",
                     url: "backend/serviceHandler.php",
                     cache: false,
-                    data: { function: "loadAppointments" },
+                    data: { "function": "loadAppointments" },
                     dataType: "json",
                     success: function (response) {
                         console.log("success2222");
@@ -194,7 +194,7 @@ $(function () {
                     },
                     error: function (e) {
                         console.log("failure");
-                    },
+                    }
                 });
             } // richtig
         });
@@ -274,7 +274,7 @@ function ajaxLoadOptions(appointmentID) {
         type: "GET",
         url: "backend/serviceHandler.php",
         cache: false,
-        data: { function: "loadOptions", param: appointmentID },
+        data: { "function": "loadOptions", param: appointmentID },
         dataType: "json",
         success: function (response) {
             console.log("success");
