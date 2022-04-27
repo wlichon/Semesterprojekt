@@ -2,8 +2,7 @@ var months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oc
 var days = ["Mon","Tue","Wed","Thu","Fri","Sat","Sun"];
 
 const slidebutton = "<div class='btn btn-primary col-auto p-1' id='lslide'><i class='bi bi-chevron-left'></i></div>";
-const commentbar = "<div class='row mt-5 comment'><div class='input-group input-group-lg'><span class='input-group-text' id='inputGroup-sizing-lg'>Comment</span><input type='text' id = 'comment' class='form-control' aria-label='Sizing example input' aria-describedby='inputGroup-sizing-lg'> <i class='bi bi-person-circle m-1'></i><input type='text' placeholder='Name' name = 'personname' id = 'personname'> <button class='btn btn-outline-secondary bg-primary text-white' type='submit' name='submitnamecommentcheckbox'>Submit</button></div></div>"
-
+const commentbar = "<div class='row mt-5 comment'><div class='input-group input-group-lg'><span class='input-group-text' id='inputGroup-sizing-lg'>Comment</span><input type='text' id = 'comment' class='form-control' aria-label='Sizing example input' aria-describedby='inputGroup-sizing-lg'><button class='btn btn-outline-secondary bg-primary text-white' type='submit' name='submitnamecommentcheckbox'>Submit</button></div></div>"
 
 $(function() {
     $("#appointments").hide();
@@ -25,29 +24,29 @@ $(function() {
                 
         
         complete: function () {
+
             //AB DA AN ALLES!!
             $(".event").on('click', e =>{
             var self = e.currentTarget;         // Element was das Klick getriggert hat
             $("#events").hide("slide", {direction : "left"}, 1000, () =>{
                 console.log(self);
                 console.log("dabinich");
-                let appointmentID = self.getAttribute("data")!;
+                var appointmentID = self.getAttribute("data")!;
                 console.log("das ist die appointmentid außerhalb der funktion:", appointmentID);
                 ajaxLoadOptions(appointmentID);
                 setTimeout(() => $("#appointments").show("slide",1000),100);
                 
                 var forum2 = $('#checkboxnamecomment');
-               // var dirtyFormID = 'checkboxnamecomment';
-                //var resetForm = <HTMLFormElement>document.getElementById(dirtyFormID);
-                //resetForm.reset();
-                console.log("das ist die appointmentid außerhalb der funktion2:", appointmentID);
+                var dirtyFormID = 'checkboxnamecomment';
+                var resetForm = <HTMLFormElement>document.getElementById(dirtyFormID);
+                resetForm.reset();
 
 
                 forum2.submit(function (e) {
-                    console.log("das ist die appointmentid in der funktion:", appointmentID);
-                    console.log($('#personname').val());
+                    var appointmentID = self.getAttribute("data")!;
                     e.stopImmediatePropagation();
                     e.preventDefault();
+                    console.log("das ist die appointmentid in der funktion:", appointmentID);
                     let termin1:number = 0;
                     let termin2:number = 0;
                     let array: Array <number> = [];
@@ -80,9 +79,9 @@ $(function() {
                         data: {function: "voteForAppointment", meetingnummer: appointmentID, name: personname, kommentar: comment, termin1auswahl: termin1, termin2auswahl: termin2},
     
                         success: function (data) {
-                            //var dirtyFormID = 'checkboxnamecomment';
-                            //var resetForm = <HTMLFormElement>document.getElementById(dirtyFormID);
-                            //resetForm.reset();
+                            var dirtyFormID = 'checkboxnamecomment';
+                            var resetForm = <HTMLFormElement>document.getElementById(dirtyFormID);
+                            resetForm.reset();
                             slidebar();
                         },
     
@@ -177,7 +176,7 @@ $(function() {
                                 var self = e.currentTarget;         // Element was das Klick getriggert hat
                                 $("#events").hide("slide", {direction : "left"}, 1000, () =>{
                                     console.log(self);
-                                    console.log("Zeile 179");
+                                    console.log("hallo hier");
                                     var appointmentID = self.getAttribute("data")!;
                                     console.log(appointmentID);
                                     ajaxLoadOptions(appointmentID);
@@ -222,7 +221,6 @@ $(function() {
                                 var self = e.currentTarget;         // Element was das Klick getriggert hat
                                 $("#events").hide("slide", {direction : "left"}, 1000, () =>{
                                     console.log(self);
-                                    console.log("Zeile 224");
                                     var appointmentID = self.getAttribute("data")!;
                                     console.log(appointmentID);
                                     ajaxLoadOptions(appointmentID);
