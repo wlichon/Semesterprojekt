@@ -39,9 +39,9 @@ class Logic
         $this->dh->createOptions($date, $terminoption2begin, $terminoption2end, $meetingID, 1, $terminoption2id);
     }
 
-    function insertIntoDB2($meetingID, $name, $comment, $termin1, $termin2, $optionID)
+    function insertIntoDB2($meetingID, $name, $comment, $termin1, $termin2)
     {
-        $this->dh->voteForAppointment($meetingID, $name, $comment, $termin1, $termin2, $optionID);
-        $this->dh->insertComment($meetingID, $name, $comment, $optionID);
+        $this->dh->voteForAppointment($meetingID, $name, $comment, $termin1, $termin2);
+        $this->dh->insertComment($meetingID, $name, $comment, $termin1, $termin2);
     }
 }

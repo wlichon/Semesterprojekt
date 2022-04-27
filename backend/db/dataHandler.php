@@ -80,7 +80,7 @@ class DataHandler
         $statement->execute();
     }
 
-    function voteForAppointment($meetingID, $name, $comment, $termin1, $termin2, $optionID)
+    function voteForAppointment($meetingID, $name, $comment, $termin1, $termin2)
     {
         $eins = 1;
         $null = 0;
@@ -100,22 +100,24 @@ class DataHandler
     }
 
 
-    function insertComment($meetingID, $name, $comment, $optionID)
+    function insertComment($meetingID, $name, $comment, $termin1, $termin2)
     {
-        $sql = "INSERT INTO kommentare (personname, comment, fk_a_id, fk_o_id) VALUES (?,?,?,?);";
-        $statement = $this->conn->prepare($sql);
-        $statement->bind_param("ssii", $name, $comment, $meetingID, $optionID);
-        $statement->execute();
+        
+        if ($termin1 == 1 || $termin2 == 1) {
+            $sql = "INSERT INTO kommentare (personname, comment, fk_a_id) VALUES (?,?,?);";
+            $statement = $this->conn->prepare($sql);
+            $statement->bind_param("ssi", $name, $comment, $meetingID); //<-- muss daher
+            $statement->execute();
+        }
     }
-
-    function deleteAppointment($id){
-        $sql = "DELETE FROM Appointment WHERE a_id=$id";
-        $res = $this->conn->query($sql);
-        return $res;
-    }
-
-
-
+    
+    
+    
+        function deleteAppointment($id){
+            $sql = "DELETE FROM Appointment WHERE a_id=$id";
+            $res = $this->conn->query($sql);
+            return $res;
+        }
 
     public function loadOptions($id)
     { //$id ist ein array von id's

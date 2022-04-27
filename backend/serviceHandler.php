@@ -34,7 +34,7 @@ if (isset($_GET["meetingnummer"])) {
     $termin1 = $_GET["termin1auswahl"];
     $termin2 = $_GET["termin2auswahl"];
     $logic = new Logic($conn);
-    $logic->insertIntoDB2($meetingID, $name, $comment, $termin1, $termin2, $meetingID);
+    $logic->insertIntoDB2($meetingID, $name, $comment, $termin1, $termin2);
 }
 
 //echo (json_encode($param[0]));
