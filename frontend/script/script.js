@@ -234,7 +234,7 @@ function slidebar() {
 function loadAppointments(response) {
     $.each(response, function (i, val) {
         var counter = 1;
-        //console.log(val[2]);
+        console.log(val);
         var date = new Date(val["date"]["date"]);
         var month = months[date.getMonth()];
         var day = days[date.getDay()];
@@ -269,6 +269,7 @@ function loadAppointments(response) {
                 }
             });
         });
+        console.log("expiration date is: " + expiration);
         var isexpired = new Date(expiration);
         var today = new Date();
         if (isexpired <= today) {
@@ -288,8 +289,8 @@ function getHighestVote(appointmentID, id) {
         data: { function: "getHighestVote", param: appointmentID },
         dataType: "json",
         success: function (response) {
-            console.log(response[1]);
-            $("#option" + id).append("<span><p class = 'mt-3' >Termin: <br><b>" + response[1] + "<b></p></span>");
+            console.log(response[0]);
+            $("#option" + id).append("<span><p class = 'mt-3' >Termin: <br><b>" + response[0] + "<b></p></span>");
             //$("#option" + i).append("<span><h5 class = 'mt-3' > abgelaufen! </h5></span>");
         },
         error: function (response) {

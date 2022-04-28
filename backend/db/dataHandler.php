@@ -23,9 +23,11 @@ class DataHandler
             $data = array();
             $iterator = 0;
             foreach ($array as $item) {
-                $data[$iterator] = new Appointment($item[2], $item[1], $item[5], $item[3], $item[4], $item[0]);
+                $data[$iterator] = new Appointment($item[5], $item[1], $item[2], $item[3], $item[4], $item[0]);
+               // echo $item[2], $item[1], $item[5], $item[3], $item[4], $item[0];
                 //new Appointment("22-03-2022", "Meeting", "20-03-2022 12:00:00", "12:00", "13:00", [1, 2]),
                 //$date,$title,$votingExpirationDate,$begin,$end,$optionIDs
+                //item[2] == date // item [5] == votingexpir
                 $iterator++;
             }
         }
@@ -121,7 +123,11 @@ class DataHandler
     }
 
     function getHighestVote($appointmentID){
-        $sql = "SELECT MAX(voteCount), begin FROM `options` WHERE fk_a_id = $appointmentID";
+        $sql = "SELECT begin FROM options WHERE fk_a_id = $appointmentID and (fk_a_id,voteCount) IN 
+        ( SELECT fk_a_id, MAX(voteCount)
+          FROM options
+          GROUP BY fk_a_id
+        )";
         $result = $this->conn->query($sql);
         if ($result->num_rows > 0) {
             $res = $result->fetch_all();
@@ -169,12 +175,12 @@ class DataHandler
         return $result;
     }
 }
+/*
 
 include("db.php");
 
 $test = new DataHandler($conn);
-$test->getHighestVote(23);
-/*
+$test->loadAppointments();
 $test->loadOptions(1);
 
 
