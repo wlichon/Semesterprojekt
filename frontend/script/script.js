@@ -128,6 +128,9 @@ $(function () {
         var terminoption2id = $("#terminoption2id").val();
         var terminoption2begin = $("#terminoption2begin").val();
         var terminoption2end = $("#terminoption2end").val();
+        date = "";
+        begin = "";
+        end = "";
         console.log(date, meetingID, title, votingExpirationDate, begin, end, terminoption1begin, terminoption1end, terminoption2begin, terminoption2end);
         $.ajax({
             type: "GET",
