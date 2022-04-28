@@ -7,6 +7,7 @@ $(function () {
     $("#appointments").hide();
     $("#events").hide();
     $("#createappointmentform").hide();
+    $('#commenttitle').hide();
     $.ajax({
         type: "GET",
         url: "backend/serviceHandler.php",
@@ -28,7 +29,12 @@ $(function () {
                     var appointmentID = self.getAttribute("data");
                     console.log("das ist die appointmentid außerhalb der funktion:", appointmentID);
                     ajaxLoadOptions(appointmentID);
+                    //loadCommentsAjax(appointmentID); // HIERHIERHEHRHEHEHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH
                     setTimeout(function () { return $("#appointments").show("slide", 1000); }, 100);
+                    /**
+                    * TODO: hier ajax call mit appointmentId als parameter, gibt rows zurück
+                     *! $("#commenttitle").show("slide", 1000);
+                    */
                     var forum2 = $('#checkboxnamecomment');
                     // var dirtyFormID = 'checkboxnamecomment';
                     //var resetForm = <HTMLFormElement>document.getElementById(dirtyFormID);
@@ -86,7 +92,6 @@ $(function () {
             console.log("failure");
         }
     });
-    console.log("hi");
     $("#submit").on('click', function () {
         console.log($("#test").prop("checked"));
     });
@@ -149,6 +154,7 @@ $(function () {
                                 var appointmentID = self.getAttribute("data");
                                 console.log(appointmentID);
                                 ajaxLoadOptions(appointmentID);
+                                //loadCommentsAjax(appointmentID); // HIERHIERHEHRHEHEHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH
                                 setTimeout(function () { return $("#appointments").show("slide", 1000); }, 100);
                             });
                         });
@@ -189,6 +195,7 @@ $(function () {
                                 var appointmentID = self.getAttribute("data");
                                 console.log(appointmentID);
                                 ajaxLoadOptions(appointmentID);
+                                //loadCommentsAjax(appointmentID); // HIERHIERHEHRHEHEHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH
                                 setTimeout(function () { return $("#appointments").show("slide", 1000); }, 100);
                             });
                         });
@@ -298,15 +305,49 @@ function ajaxLoadOptions(appointmentID) {
         data: { function: "loadOptions", param: appointmentID },
         dataType: "json",
         success: function (response) {
-            console.log("success");
+            console.log("ajaxLoadOptionsSuccess");
             loadOptions(response);
             $("#appointments").append(slidebutton + commentbar);
             $("#lslide").on('click', slidebar);
+            loadCommentsAjax(appointmentID);
         },
         error: function (response) {
             console.log("failure");
+        },
+        complete: function (response) {
+            //loadCommentsAjax(appointmentID);
         }
     });
 }
 function reloadAfterDelete() {
+}
+function loadCommentsAjax(appointmentID) {
+    $.ajax({
+        type: "GET",
+        url: "backend/serviceHandler.php",
+        cache: false,
+        data: { function: "loadCommentsAndNames", param: appointmentID },
+        dataType: "json",
+        success: function (response) {
+            console.log("SUCCESS: hier kommen die apppointments von", appointmentID);
+            console.log(response);
+            $("#appointments").remove('#commentheader');
+            $("#appointments").append("<div><h3 class = 'text-white mt-5' id = 'commentheader'> Kommentare </h3> </div>");
+            $.each(response, function (i, val) {
+                var commentid = val['commentid'];
+                var name = val['name'];
+                var comment = val['comment'];
+                console.log(commentid, name, comment);
+                $("#appointments").append("<div> <p class = 'text-white'>" + "#" + commentid
+                    + " " + name + " schrieb dazu: " +
+                    comment + "</p> </div>");
+            });
+        },
+        error: function (response) {
+            $("#appointments").remove('#commentheader');
+            $("#appointments").append("<div><h3 class = 'text-white mt-5' id = 'commentheader'> Bisher keine Kommentare </h3> </div>");
+            console.log("ERROR: hier kommen die apppointments von", appointmentID);
+            console.log(response);
+        }
+    });
 }
