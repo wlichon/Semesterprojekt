@@ -286,14 +286,14 @@ function loadAppointments(response) {
     $.each(response, function (i, val) {
         var counter = 1;
         console.log(val);
-        var date = new Date(val["date"]["date"]);
-        var month = months[date.getMonth()];
-        var day = days[date.getDay()];
-        var dayOfMonth = date.getDate();
-        var year = date.getFullYear();
+        //var date = new Date(val["date"]["date"]);
+        //var month = months[date.getMonth()];
+        //var day = days[date.getDay()];
+        //var dayOfMonth = date.getDate();
+        //var year = date.getFullYear();
         var expiration = val["votingExpirationDate"]["date"].substr(0, 19);
-        var begin = val["begin"]["date"].substr(11).substr(0, 8);
-        var end = val["end"]["date"].substr(11).substr(0, 8);
+        //var begin = val["begin"]["date"].substr(11).substr(0, 8);
+        //var end = val["end"]["date"].substr(11).substr(0, 8);
         var id = val["id"];
         $("#events").append("<div class='col-md-2 event' id ='option" + i + "' + data=" + id + ">" +
             "<div class='col wrapper'>" +
