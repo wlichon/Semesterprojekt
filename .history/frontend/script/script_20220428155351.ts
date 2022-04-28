@@ -237,12 +237,12 @@ $(function() {
                         },
                     
                     complete: function () {
-                                $(".event").find(".bi-calendar2-x-fill").on('click', e =>{
+                                $(".event").on('click', e =>{
                                 var self = e.currentTarget;         // Element was das Klick getriggert hat
                                 $("#events").hide("slide", {direction : "left"}, 1000, () =>{
                                     console.log(self);
                                     console.log("Zeile 224");
-                                    let appointmentID = self.getAttribute("data")!;
+                                    var appointmentID = self.getAttribute("data")!;
                                     console.log(appointmentID);
                                     ajaxLoadOptions(appointmentID);
                                     //loadCommentsAjax(appointmentID); // HIERHIERHEHRHEHEHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH

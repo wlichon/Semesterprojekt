@@ -101,8 +101,8 @@ $(function() {
                         }
                     })
     
-                    console.log("Termin1:", termin1);
-                    console.log("Termin2:", termin2);
+                    console.log(termin1);
+                    console.log(termin2);
                     //console.log(personname);
                     //console.log(comment);
         })
@@ -237,12 +237,12 @@ $(function() {
                         },
                     
                     complete: function () {
-                                $(".event").find(".bi-calendar2-x-fill").on('click', e =>{
+                                $(".event").on('click', e =>{
                                 var self = e.currentTarget;         // Element was das Klick getriggert hat
                                 $("#events").hide("slide", {direction : "left"}, 1000, () =>{
                                     console.log(self);
                                     console.log("Zeile 224");
-                                    let appointmentID = self.getAttribute("data")!;
+                                    var appointmentID = self.getAttribute("data")!;
                                     console.log(appointmentID);
                                     ajaxLoadOptions(appointmentID);
                                     //loadCommentsAjax(appointmentID); // HIERHIERHEHRHEHEHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH
@@ -407,7 +407,7 @@ function loadCommentsAjax(appointmentID: string) {
 
         success: function (response) {
             console.log("SUCCESS: hier kommen die apppointments von", appointmentID);
-            //console.log(response);
+            console.log(response);
             $("#appointments").remove('#commentheader');
             $("#appointments").append("<div><h3 class = 'text-white mt-5' id = 'commentheader'> Kommentare </h3> </div>");
             $.each(response, (i: number,val) =>{
