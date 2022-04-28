@@ -6,22 +6,22 @@
     background-color:rgb(228, 242, 217);
 }
 
-h2 {font-size:1rem;} 
+h1 {font-size:1rem;} 
  
 @media (min-width: 544px) {  
-  h2 {font-size:1.5rem;} 
+  h1 {font-size:1.5rem;} 
 }
  
 @media (min-width: 768px) {  
-  h2 {font-size:1rem;} 
+  h1 {font-size:2rem;} 
 }
  
 @media (min-width: 992px) { 
-  h2 {font-size:1rem;} 
+  h1 {font-size:2.5rem;} 
 }
  
 @media (min-width: 1200px) {  
-  h2 {font-size:1.5rem;}     
+  h1 {font-size:3rem;}     
 }
 
 .bi-person-circle{
