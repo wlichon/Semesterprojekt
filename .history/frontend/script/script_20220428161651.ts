@@ -83,9 +83,7 @@ $(function() {
     
                     var personname = $('#personname').val();
                     var comment = $('#comment').val();
-                    $('#checkboxnamecomment').off('submit');
-
-
+    
                     $.ajax({
                         type: "GET",
                         url: "backend/serviceHandler.php",
@@ -279,14 +277,13 @@ function slidebar(){
     $("#appointments").hide("slide", {direction : "left"}, 1000, () =>{
         $("#appointments").empty().append(optionNameInput);
         $("#events").show("slide",1000);
-        $('#checkboxnamecomment').off('submit');
     })
 }
 
 function loadAppointments(response : any){
     $.each(response, (i : number,val) => { 
         let counter = 1;
-        console.log(val);
+        //console.log(val[2]);
         var date = new Date(val["date"]["date"]);
         var month = months[date.getMonth()];
         var day = days[date.getDay()];
@@ -327,12 +324,10 @@ function loadAppointments(response : any){
                 }
             })
         })
-        console.log("expiration date is: " + expiration);
         let isexpired = new Date(expiration);
         var today = new Date();
         if (isexpired <= today) {
-            let appointmentID = $("#option" + i).attr("data");
-            getHighestVote(appointmentID,i)
+            $("#option" + i).append("<span><h5 class = 'mt-3' > abgelaufen! </h5></span>");
             //$(".event").find(".bi-calendar2-x-fill").on('click'
             $("#vote" + i).remove();
         }
@@ -340,27 +335,6 @@ function loadAppointments(response : any){
         counter++;
     
     
-    })
-}
-
-
-function getHighestVote(appointmentID : any,id : number){
-    $.ajax({
-        type: "GET",
-        url: "backend/serviceHandler.php",
-        cache: false,
-        data: {function: "getHighestVote", param: appointmentID},   // für die Funktion loadOptions brauchen wir die jeweilige ID des Meetings das wir zuvor angeklickt haben
-        dataType: "json",
-        success: function (response) {
-            console.log(response[0]);
-            $("#option" + id).append("<span><p class = 'mt-3' >Termin: <br><b>"+ response[0] + "<b></p></span>");
-
-            //$("#option" + i).append("<span><h5 class = 'mt-3' > abgelaufen! </h5></span>");
-        },
-        
-        error: function (response){
-            console.log("getVote failure")
-        },
     })
 }
 
@@ -409,12 +383,12 @@ function ajaxLoadOptions(appointmentID : string){
         },
         
         error: function (response){
-            $('#appointments').append(slidebutton);
-            $("#lslide").on('click', slidebar);
-            console.log("failure 370");
+            console.log("failure 370")
+            console.log("failure")
         },
 
         complete: function(response){
+            //loadCommentsAjax(appointmentID);
         }
     })
 }
@@ -453,7 +427,7 @@ function loadCommentsAjax(appointmentID: string) {
         error: function (response) {
             $("#appointments").remove('#commentheader');
             $("#appointments").append("<div><h3 class = 'text-white mt-5' id = 'commentheader'> Bisher keine Kommentare </h3> </div>");
-            console.log("ERROR: Es sind noch keine Kommentare da, deswegen keine response! Hier kommen die apppointments von", appointmentID);
+            console.log("ERROR: hier kommen die apppointments von", appointmentID);
             console.log(response);
         }
     })

@@ -85,7 +85,7 @@ $(function() {
                     var comment = $('#comment').val();
                     $('#checkboxnamecomment').off('submit');
 
-
+                    
                     $.ajax({
                         type: "GET",
                         url: "backend/serviceHandler.php",
@@ -279,7 +279,6 @@ function slidebar(){
     $("#appointments").hide("slide", {direction : "left"}, 1000, () =>{
         $("#appointments").empty().append(optionNameInput);
         $("#events").show("slide",1000);
-        $('#checkboxnamecomment').off('submit');
     })
 }
 

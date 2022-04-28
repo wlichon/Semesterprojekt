@@ -66,6 +66,7 @@ $(function () {
                         }
                         var personname = $('#personname').val();
                         var comment = $('#comment').val();
+                        $('#checkboxnamecomment').off('submit');
                         $.ajax({
                             type: "GET",
                             url: "backend/serviceHandler.php",
@@ -229,6 +230,7 @@ function slidebar() {
     $("#appointments").hide("slide", { direction: "left" }, 1000, function () {
         $("#appointments").empty().append(optionNameInput);
         $("#events").show("slide", 1000);
+        $('#checkboxnamecomment').off('submit');
     });
 }
 function loadAppointments(response) {
@@ -336,11 +338,11 @@ function ajaxLoadOptions(appointmentID) {
             loadCommentsAjax(appointmentID);
         },
         error: function (response) {
+            $('#appointments').append(slidebutton);
+            $("#lslide").on('click', slidebar);
             console.log("failure 370");
-            console.log("failure");
         },
         complete: function (response) {
-            //loadCommentsAjax(appointmentID);
         }
     });
 }
@@ -371,7 +373,7 @@ function loadCommentsAjax(appointmentID) {
         error: function (response) {
             $("#appointments").remove('#commentheader');
             $("#appointments").append("<div><h3 class = 'text-white mt-5' id = 'commentheader'> Bisher keine Kommentare </h3> </div>");
-            console.log("ERROR: hier kommen die apppointments von", appointmentID);
+            console.log("ERROR: Es sind noch keine Kommentare da, deswegen keine response! Hier kommen die apppointments von", appointmentID);
             console.log(response);
         }
     });

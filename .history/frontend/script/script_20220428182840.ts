@@ -83,16 +83,14 @@ $(function() {
     
                     var personname = $('#personname').val();
                     var comment = $('#comment').val();
-                    $('#checkboxnamecomment').off('submit');
-
-
+    
                     $.ajax({
                         type: "GET",
                         url: "backend/serviceHandler.php",
                         data: {function: "voteForAppointment", meetingnummer: appointmentID, name: personname, kommentar: comment, termin1auswahl: termin1, termin2auswahl: termin2},
                         dataType: "test",
                         success: function (data) {
-                            $('#checkboxnamecomment').off('submit');
+                            //$('#checkboxnamecomment').off('submit');
                             console.log("zeile 84");
                         },
                         
@@ -279,7 +277,6 @@ function slidebar(){
     $("#appointments").hide("slide", {direction : "left"}, 1000, () =>{
         $("#appointments").empty().append(optionNameInput);
         $("#events").show("slide",1000);
-        $('#checkboxnamecomment').off('submit');
     })
 }
 
