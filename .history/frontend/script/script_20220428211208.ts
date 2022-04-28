@@ -198,8 +198,6 @@ $(function() {
                                 $(".event").on('click', e =>{
                                 var self = e.currentTarget;         // Element was das Klick getriggert hat
                                 $("#events").hide("slide", {direction : "left"}, 1000, () =>{
-                                    
-
                                     console.log(self);
                                     console.log("Zeile 179");
                                     var appointmentID = self.getAttribute("data")!;
@@ -209,6 +207,67 @@ $(function() {
                                     setTimeout(() => $("#appointments").show("slide",1000),100);
 
                                     
+
+                var forum2 = $('#checkboxnamecomment');
+                // var dirtyFormID = 'checkboxnamecomment';
+                 //var resetForm = <HTMLFormElement>document.getElementById(dirtyFormID);
+                 //resetForm.reset();
+                 console.log("das ist die appointmentid außerhalb der funktion2:", appointmentID);
+ 
+ 
+                 forum2.on("submit",function (e) {
+                     console.log("das ist die appointmentid in der funktion:", appointmentID);
+                     //e.stopImmediatePropagation();
+                     e.preventDefault();
+                     let termin1:number = 0;
+                     let termin2:number = 0;
+                     let array: Array <number> = [];
+                     var checkboxing: number;
+                     HTMLInputElement: var checkbox = $("input:checkbox[name=type]:checked");
+                     $(checkbox).each(function() {
+                         checkboxing = $(this).val() as number;
+                         //alert(checkboxing);
+                         array.push(checkboxing);   
+                     });
+     
+                     if (array[0] == 0) {
+                         termin1 = 1;
+                     }
+     
+                     if (array[0] == 1) {
+                         termin2 = 1;
+                     }
+     
+                     if (array[1] == 1) {
+                         termin2 = 1;
+                     }
+     
+                     var personname = $('#personname').val();
+                     var comment = $('#comment').val();
+                     $('#checkboxnamecomment').off('submit');
+ 
+ 
+                     $.ajax({
+                         type: "GET",
+                         url: "backend/serviceHandler.php",
+                         data: {function: "voteForAppointment", meetingnummer: appointmentID, name: personname, kommentar: comment, termin1auswahl: termin1, termin2auswahl: termin2},
+                         dataType: "test",
+                         success: function (data) {
+                             $('#checkboxnamecomment').off('submit');
+                             console.log("zeile 84");
+                         },
+                         
+                         error: function (data) {
+                             $('#checkboxnamecomment').off('submit');
+                             slidebar();
+                             console.log("hallo2");
+                         }
+                     })
+     
+                     console.log("Termin1:", termin1);
+                     console.log("Termin2:", termin2);
+                     //console.log(personname);
+                     //console.log(comment);
                                     })
                     
                                 })
@@ -252,61 +311,6 @@ $(function() {
                                 $("#events").hide("slide", {direction : "left"}, 1000, () =>{
                                     console.log(self);
                                     console.log("Zeile 224");
-                                    var forum2 = $('#checkboxnamecomment');
-                                    forum2.on("submit",function (e) {
-                                        console.log("das ist die appointmentid in der funktion:", appointmentID);
-                                        //e.stopImmediatePropagation();
-                                        e.preventDefault();
-                                        let termin1:number = 0;
-                                        let termin2:number = 0;
-                                        let array: Array <number> = [];
-                                        var checkboxing: number;
-                                        HTMLInputElement: var checkbox = $("input:checkbox[name=type]:checked");
-                                        $(checkbox).each(function() {
-                                            checkboxing = $(this).val() as number;
-                                            //alert(checkboxing);
-                                            array.push(checkboxing);   
-                                        });
-                        
-                                        if (array[0] == 0) {
-                                            termin1 = 1;
-                                        }
-                        
-                                        if (array[0] == 1) {
-                                            termin2 = 1;
-                                        }
-                        
-                                        if (array[1] == 1) {
-                                            termin2 = 1;
-                                        }
-                        
-                                        var personname = $('#personname').val();
-                                        var comment = $('#comment').val();
-                                        $('#checkboxnamecomment').off('submit');
-                    
-                    
-                                        $.ajax({
-                                            type: "GET",
-                                            url: "backend/serviceHandler.php",
-                                            data: {function: "voteForAppointment", meetingnummer: appointmentID, name: personname, kommentar: comment, termin1auswahl: termin1, termin2auswahl: termin2},
-                                            dataType: "test",
-                                            success: function (data) {
-                                                $('#checkboxnamecomment').off('submit');
-                                                console.log("zeile 84");
-                                            },
-                                            
-                                            error: function (data) {
-                                                $('#checkboxnamecomment').off('submit');
-                                                slidebar();
-                                                console.log("hallo2");
-                                            }
-                                        })
-                        
-                                        console.log("Termin1:", termin1);
-                                        console.log("Termin2:", termin2);
-                                        //console.log(personname);
-                                        //console.log(comment);
-                            })
                                     let appointmentID = self.getAttribute("data")!;
                                     console.log(appointmentID);
                                     ajaxLoadOptions(appointmentID);
@@ -323,8 +327,7 @@ $(function() {
                         console.log("failure 238");
                     },     
                 })
-            },
-                     // richtig
+            }         // richtig
             });
         });
     });
@@ -559,6 +562,3 @@ function loadVotingCounter(appointmentID: string) {
         }
     })
 }
-
-
-

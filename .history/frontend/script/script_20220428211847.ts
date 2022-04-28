@@ -252,7 +252,7 @@ $(function() {
                                 $("#events").hide("slide", {direction : "left"}, 1000, () =>{
                                     console.log(self);
                                     console.log("Zeile 224");
-                                    var forum2 = $('#checkboxnamecomment');
+                                    
                                     forum2.on("submit",function (e) {
                                         console.log("das ist die appointmentid in der funktion:", appointmentID);
                                         //e.stopImmediatePropagation();
