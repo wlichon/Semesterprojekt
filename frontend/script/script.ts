@@ -28,8 +28,9 @@ $(function() {
         
         complete: function () {
             //AB DA AN ALLES!!
-            $(".event").on('click', e =>{
-            var self = e.currentTarget;         // Element was das Klick getriggert hat
+            $(".event").find(".bi-calendar2-x-fill").on('click', e =>{
+            var self = e.currentTarget;
+            //console.log((e as any).parent());      // Element was das Klick getriggert hat
             $("#events").hide("slide", {direction : "left"}, 1000, () =>{
                 console.log(self);
                 console.log("dabinich");
@@ -104,7 +105,7 @@ $(function() {
         },
                
         error: function(e){
-            console.log("failure");
+            console.log("failure 107");
         }
         
         
@@ -190,7 +191,7 @@ $(function() {
                     },           
                     
                     error: function(e){
-                        console.log("failure");
+                        console.log("failure 193");
                     },     
                 })
             },
@@ -235,7 +236,7 @@ $(function() {
                     },           
                     
                     error: function(e){
-                        console.log("failure");
+                        console.log("failure 238");
                     },     
                 })
             }         // richtig
@@ -284,7 +285,7 @@ function loadAppointments(response : any){
             "<h2>" + val["title"] + "</h2>" +
             "<h6><p>Voting ends:</p>" +
             "<p>" + expiration + "</p></h6>" + 
-            '</div><i class="bi bi-backspace-fill p-1" id="remove'+ i +'" data='+ id +'></i> </div>'
+            '</div><i class="bi bi-backspace-fill p-1" id="remove'+ i +'" data='+ id +'></i> <i class="bi bi-calendar2-x-fill p-1" id="vote'+i+'"data="'+id+'"></i></div>'
             
             );
 
@@ -296,7 +297,7 @@ function loadAppointments(response : any){
                 type: "GET",
                 url: "backend/serviceHandler.php",
                 cache: false,
-                data: {function: "deleteAppointment",param: id},   // für die Funktion loadOptions brauchen wir die jeweilige ID des Meetings das wir zuvor angeklickt haben
+                data: {function: "deleteAppointment",param: id}, 
                 dataType: "text",
                 success: function (response) {
                     console.log("delete success")
@@ -311,8 +312,9 @@ function loadAppointments(response : any){
         let isexpired = new Date(expiration);
         var today = new Date();
         if (isexpired <= today) {
-            $("#option" + i).append("<h5 class = 'mt-3' > abgelaufen! </h5>");
-            $("#option" + i).attr("class", "col-md-2 noevent");
+            $("#option" + i).append("<span><h5 class = 'mt-3' > abgelaufen! </h5></span>");
+            //$(".event").find(".bi-calendar2-x-fill").on('click'
+            $("#vote" + i).remove();
         }
 
         counter++;
@@ -366,7 +368,7 @@ function ajaxLoadOptions(appointmentID : string){
         },
 
         error: function (response){
-            console.log("failure")
+            console.log("failure 370")
         }
     })
 }

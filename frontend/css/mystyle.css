@@ -37,8 +37,10 @@ body{
     cursor: pointer;
 }
 
-.event:hover{
-    background-color:blue;
+.bi-calendar2-x-fill:hover{
+    background-color: blue;
+    border-radius:10px;
+    cursor: pointer;
 }
 
 .noevent:hover{
@@ -48,4 +50,5 @@ body{
 .bi-backspace-fill:hover{
     cursor:pointer;
     background-color: red;
+    border-radius:10px;
 }
