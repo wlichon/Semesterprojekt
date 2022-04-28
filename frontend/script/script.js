@@ -72,6 +72,7 @@ $(function () {
                             data: { function: "voteForAppointment", meetingnummer: appointmentID, name: personname, kommentar: comment, termin1auswahl: termin1, termin2auswahl: termin2 },
                             dataType: "test",
                             success: function (data) {
+                                $('#checkboxnamecomment').off('submit');
                                 console.log("zeile 84");
                             },
                             error: function (data) {
@@ -80,10 +81,10 @@ $(function () {
                                 console.log("hallo2");
                             }
                         });
-                        console.log(termin1);
-                        console.log(termin2);
-                        console.log(personname);
-                        console.log(comment);
+                        console.log("Termin1:", termin1);
+                        console.log("Termin2:", termin2);
+                        //console.log(personname);
+                        //console.log(comment);
                     });
                 });
             });
@@ -335,14 +336,14 @@ function loadCommentsAjax(appointmentID) {
         dataType: "json",
         success: function (response) {
             console.log("SUCCESS: hier kommen die apppointments von", appointmentID);
-            console.log(response);
+            //console.log(response);
             $("#appointments").remove('#commentheader');
             $("#appointments").append("<div><h3 class = 'text-white mt-5' id = 'commentheader'> Kommentare </h3> </div>");
             $.each(response, function (i, val) {
                 var commentid = val['commentid'];
                 var name = val['name'];
                 var comment = val['comment'];
-                console.log(commentid, name, comment);
+                //console.log(commentid, name, comment);
                 $("#appointments").append("<div> <p class = 'text-white'>" + "#" + commentid
                     + " " + name + " schrieb dazu: " +
                     comment + "</p> </div>");

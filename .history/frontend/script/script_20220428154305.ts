@@ -101,10 +101,10 @@ $(function() {
                         }
                     })
     
-                    console.log("Termin1:", termin1);
-                    console.log("Termin2:", termin2);
-                    //console.log(personname);
-                    //console.log(comment);
+                    console.log(termin1);
+                    console.log(termin2);
+                    console.log(personname);
+                    console.log(comment);
         })
             })
             
@@ -407,14 +407,14 @@ function loadCommentsAjax(appointmentID: string) {
 
         success: function (response) {
             console.log("SUCCESS: hier kommen die apppointments von", appointmentID);
-            //console.log(response);
+            console.log(response);
             $("#appointments").remove('#commentheader');
             $("#appointments").append("<div><h3 class = 'text-white mt-5' id = 'commentheader'> Kommentare </h3> </div>");
             $.each(response, (i: number,val) =>{
                 var commentid = val['commentid']; 
                 var name = val['name'];
                 var comment = val['comment'];
-                //console.log(commentid, name, comment);
+                console.log(commentid, name, comment);
 
                 $("#appointments").append(
                 "<div> <p class = 'text-white'>" + "#" + commentid
