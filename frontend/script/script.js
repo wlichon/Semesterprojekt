@@ -195,7 +195,7 @@ $(function () {
                         loadAppointments(response); //das neu eingefügte Appointment laden
                     },
                     complete: function () {
-                        $(".event").on('click', function (e) {
+                        $(".event").find(".bi-calendar2-x-fill").on('click', function (e) {
                             var self = e.currentTarget; // Element was das Klick getriggert hat
                             $("#events").hide("slide", { direction: "left" }, 1000, function () {
                                 console.log(self);

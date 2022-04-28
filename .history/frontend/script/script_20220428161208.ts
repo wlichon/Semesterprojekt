@@ -236,6 +236,15 @@ $(function() {
                         },
                     
                     complete: function () {
+                        /*
+                        $(".event").find(".bi-calendar2-x-fill").on('click', e =>{
+                            var self = e.currentTarget;
+                            //console.log((e as any).parent());      // Element was das Klick getriggert hat
+                            $("#events").hide("slide", {direction : "left"}, 1000, () =>{
+                                console.log(self);
+                                console.log("dabinich");
+                                let appointmentID = self.getAttribute("data")!;
+                                */
                                 $(".event").find(".bi-calendar2-x-fill").on('click', e =>{
                                 var self = e.currentTarget;         // Element was das Klick getriggert hat
                                 $("#events").hide("slide", {direction : "left"}, 1000, () =>{
