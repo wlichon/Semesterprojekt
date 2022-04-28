@@ -272,11 +272,29 @@ function loadAppointments(response) {
         var isexpired = new Date(expiration);
         var today = new Date();
         if (isexpired <= today) {
-            $("#option" + i).append("<span><h5 class = 'mt-3' > abgelaufen! </h5></span>");
+            var appointmentID = $("#option" + i).attr("data");
+            getHighestVote(appointmentID, i);
             //$(".event").find(".bi-calendar2-x-fill").on('click'
             $("#vote" + i).remove();
         }
         counter++;
+    });
+}
+function getHighestVote(appointmentID, id) {
+    $.ajax({
+        type: "GET",
+        url: "backend/serviceHandler.php",
+        cache: false,
+        data: { function: "getHighestVote", param: appointmentID },
+        dataType: "json",
+        success: function (response) {
+            console.log(response[1]);
+            $("#option" + id).append("<span><p class = 'mt-3' >Termin: <br><b>" + response[1] + "<b></p></span>");
+            //$("#option" + i).append("<span><h5 class = 'mt-3' > abgelaufen! </h5></span>");
+        },
+        error: function (response) {
+            console.log("getVote failure");
+        },
     });
 }
 function loadOptions(response) {

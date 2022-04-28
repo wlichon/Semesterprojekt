@@ -120,6 +120,17 @@ class DataHandler
         }
     }
 
+    function getHighestVote($appointmentID){
+        $sql = "SELECT MAX(voteCount), begin FROM `options` WHERE fk_a_id = $appointmentID";
+        $result = $this->conn->query($sql);
+        if ($result->num_rows > 0) {
+            $res = $result->fetch_all();
+            
+            
+        }
+        return $res[0];
+    }
+
 
     function loadCommentsAndNames($id)
     {
@@ -158,12 +169,12 @@ class DataHandler
         return $result;
     }
 }
-/*
 
 include("db.php");
-dd
+
 $test = new DataHandler($conn);
-$test->loadAppointments();
+$test->getHighestVote(23);
+/*
 $test->loadOptions(1);
 
 

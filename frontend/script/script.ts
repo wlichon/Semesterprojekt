@@ -327,7 +327,8 @@ function loadAppointments(response : any){
         let isexpired = new Date(expiration);
         var today = new Date();
         if (isexpired <= today) {
-            $("#option" + i).append("<span><h5 class = 'mt-3' > abgelaufen! </h5></span>");
+            let appointmentID = $("#option" + i).attr("data");
+            getHighestVote(appointmentID,i)
             //$(".event").find(".bi-calendar2-x-fill").on('click'
             $("#vote" + i).remove();
         }
@@ -335,6 +336,27 @@ function loadAppointments(response : any){
         counter++;
     
     
+    })
+}
+
+
+function getHighestVote(appointmentID : any,id : number){
+    $.ajax({
+        type: "GET",
+        url: "backend/serviceHandler.php",
+        cache: false,
+        data: {function: "getHighestVote", param: appointmentID},   // für die Funktion loadOptions brauchen wir die jeweilige ID des Meetings das wir zuvor angeklickt haben
+        dataType: "json",
+        success: function (response) {
+            console.log(response[1]);
+            $("#option" + id).append("<span><p class = 'mt-3' >Termin: <br><b>"+ response[1] + "<b></p></span>");
+
+            //$("#option" + i).append("<span><h5 class = 'mt-3' > abgelaufen! </h5></span>");
+        },
+        
+        error: function (response){
+            console.log("getVote failure")
+        },
     })
 }
 

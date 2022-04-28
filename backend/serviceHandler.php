@@ -5,9 +5,6 @@ include(__DIR__ . "\db\db.php");
 $param = "";
 $function = "";
 
-$function = "deleteAppointment";
-$param = 2;
-
 isset($_GET["function"]) ? $function = $_GET["function"] : false;
 isset($_GET["param"]) ? $param = $_GET["param"] : false;
 
