@@ -4,5 +4,5 @@
 4. Rückkehrbutton bei Formular für Erstellung eines Appointmens einpflegen -> wie bei den anderen
 5. Manchmal erscheint einfach ein zweites Name Input Field, das was wir vorher genutzt haben
 6. Name und Commentbar schöner anpassen, kleben aneinander und Anordnung ist komisch
-7. Code bisschen bereinigen
-8. Falls noch Zeit bleibt Design verschönern
+7. Code 
+7. Falls noch Zeit bleibt Design verschönern
