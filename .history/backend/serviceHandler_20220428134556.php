@@ -12,7 +12,7 @@ isset($_GET["function"]) ? $function = $_GET["function"] : false;
 isset($_GET["param"]) ? $param = $_GET["param"] : false;
 
 
-if (isset($_GET["param1"])) {   // Appointment erstellen -> spezielle Funktion des serviceHandlers um in Datenbank einzutragen
+if (isset($_GET["param1"])) {   // 
     $date = $_GET["param1"];
     $meetingID = $_GET["param2"];
     $title = $_GET["param3"];

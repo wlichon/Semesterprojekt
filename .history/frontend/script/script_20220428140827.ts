@@ -2,7 +2,7 @@ var months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oc
 var days = ["Mon","Tue","Wed","Thu","Fri","Sat","Sun"];
 
 const slidebutton = "<div class='btn btn-primary col-auto p-1' id='lslide'><i class='bi bi-chevron-left'></i></div>";
-const commentbar = "<div class='row mt-5 comment'><div class='input-group input-group-lg'><span class='input-group-text' id='inputGroup-sizing-lg'>Comment</span><input type='text' id = 'comment' class='form-control' aria-label='Sizing example input' aria-describedby='inputGroup-sizing-lg'> <span class='input-group-text' id='inputGroup-sizing-lg'>Name</span><input type='text' name = 'personname' id = 'personname'> <button class='btn btn-outline-secondary bg-primary text-white' type='submit' name='submitnamecommentcheckbox'>Submit</button></div></div>"
+const commentbar = "<div class='row mt-5 comment'><div class='input-group input-group-lg'><span class='input-group-text' id='inputGroup-sizing-lg'>Comment</span><input type='text' id = 'comment' class='form-control' aria-label='Sizing example input' aria-describedby='inputGroup-sizing-lg'> <span class='input-group-text' id='inputGroup-sizing-lg'>Name</span><input type='text' class='form-control'' placeholder='Name' name = 'personname' id = 'personname'> <button class='btn btn-outline-secondary bg-primary text-white' type='submit' name='submitnamecommentcheckbox'>Submit</button></div></div>"
 
 
 

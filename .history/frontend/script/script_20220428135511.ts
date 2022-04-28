@@ -2,7 +2,7 @@ var months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oc
 var days = ["Mon","Tue","Wed","Thu","Fri","Sat","Sun"];
 
 const slidebutton = "<div class='btn btn-primary col-auto p-1' id='lslide'><i class='bi bi-chevron-left'></i></div>";
-const commentbar = "<div class='row mt-5 comment'><div class='input-group input-group-lg'><span class='input-group-text' id='inputGroup-sizing-lg'>Comment</span><input type='text' id = 'comment' class='form-control' aria-label='Sizing example input' aria-describedby='inputGroup-sizing-lg'> <span class='input-group-text' id='inputGroup-sizing-lg'>Name</span><input type='text' name = 'personname' id = 'personname'> <button class='btn btn-outline-secondary bg-primary text-white' type='submit' name='submitnamecommentcheckbox'>Submit</button></div></div>"
+const commentbar = "<div class='row mt-5 comment'><div class='input-group input-group-lg'><span class='input-group-text' id='inputGroup-sizing-lg'>Comment</span><input type='text' id = 'comment' class='form-control' aria-label='Sizing example input' aria-describedby='inputGroup-sizing-lg'> <i class='bi bi-person-circle m-1'></i><input type='text' placeholder='Name' name = 'personname' id = 'personname'> <button class='btn btn-outline-secondary bg-primary text-white' type='submit' name='submitnamecommentcheckbox'>Submit</button></div></div>"
 
 
 
@@ -135,12 +135,11 @@ $(function() {
 
     var frm = $('#createappointmentform');
     $("#createappointmentform").append(slidebutton);
-    $("#lslide").on('click', function() {
-        $("#createappointmentform").hide("slide", {direction : "left"}, 1000, () =>{
-            $("#appointments").empty().append(optionNameInput);
-            $("#events").show("slide",1000);
-        })
-    });
+    $("#lslide").on('click', hideForm);
+
+function hideForm() {
+    
+}
 
     frm.submit(function (e) {
         e.preventDefault();
@@ -261,13 +260,17 @@ $(function() {
         });
     });
 
-
 const optionNameInput = '<div class="col-md d-flex justify-content-between" style="flex-direction: column">'+
     '<div class="row h-80">'+
         '<div class="col">'+
            '<h2 class="align-self-center">Options</h2>'+
         '</div>'+
     '</div>'+
+    '<div class="row inputs h-20 align-self-bottom">'+
+        '<div class="col-md">'+
+            '<i class="bi bi-person-circle m-1"></i><input type="text" placeholder="Name">'+
+            '</div>'+
+        '</div>'+
     '</div>'
 
 
