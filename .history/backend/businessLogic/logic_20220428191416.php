@@ -27,13 +27,13 @@ class Logic
             case "loadCommentsAndNames":
                 $res = $this->dh->loadCommentsAndNames($param);
                 break;
-            case "getHighestVote":
-                $res = $this->dh->getHighestVote($param);
-                break;
-            case "loadVotingCounter":
-                $res = $this->dh->loadVotingCounter($param);
-                break;
-            default:
+                case "getHighestVote":
+                    $res = $this->dh->getHighestVote($param);
+                    break;
+                    default:
+                    case "loadVotingCounter":
+                        $res = $this->dh->loadVotingCounter($param);
+                        break;
                 $res = null;
                 break;
         }

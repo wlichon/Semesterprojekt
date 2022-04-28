@@ -445,7 +445,7 @@ function loadCommentsAjax(appointmentID: string) {
                 //console.log(commentid, name, comment);
 
                 $("#appointments").append(
-                "<div> <p class = 'text-white'>" + "<strong>" + "#" + commentid + "</strong>"
+                "<div> <p class = 'text-white'>" + "#" + commentid
                 + " " + name + " schrieb dazu: " +
                 comment + "</p> </div>"
                 );

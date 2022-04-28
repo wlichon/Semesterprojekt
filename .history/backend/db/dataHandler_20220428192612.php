@@ -185,7 +185,7 @@ class DataHandler
             $data = array();
             $iterator = 0;
             foreach ($array as $item) {
-                $data[$iterator] = new Vote($item[1], $item[5], $item[2], $item[3], $item[4]);
+                $data[$iterator] = new Vote(val[1], val[5], val[2], val{});
                 $iterator++;
             }
         }

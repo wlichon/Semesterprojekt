@@ -32,7 +32,6 @@ class Logic
                 break;
             case "loadVotingCounter":
                 $res = $this->dh->loadVotingCounter($param);
-                break;
             default:
                 $res = null;
                 break;

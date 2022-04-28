@@ -336,6 +336,7 @@ function ajaxLoadOptions(appointmentID) {
             $("#appointments").append(slidebutton + commentbar);
             $("#lslide").on('click', slidebar);
             loadCommentsAjax(appointmentID);
+            loadVotingCounter(appointmentID);
         },
         error: function (response) {
             $('#appointments').append(slidebutton);
@@ -365,7 +366,7 @@ function loadCommentsAjax(appointmentID) {
                 var name = val['name'];
                 var comment = val['comment'];
                 //console.log(commentid, name, comment);
-                $("#appointments").append("<div> <p class = 'text-white'>" + "#" + commentid
+                $("#appointments").append("<div> <p class = 'text-white'>" + "<strong>" + "#" + commentid + "</strong>"
                     + " " + name + " schrieb dazu: " +
                     comment + "</p> </div>");
             });
@@ -374,6 +375,34 @@ function loadCommentsAjax(appointmentID) {
             $("#appointments").remove('#commentheader');
             $("#appointments").append("<div><h3 class = 'text-white mt-5' id = 'commentheader'> Bisher keine Kommentare </h3> </div>");
             console.log("ERROR: Es sind noch keine Kommentare da, deswegen keine response! Hier kommen die apppointments von", appointmentID);
+            console.log(response);
+        }
+    });
+}
+function loadVotingCounter(appointmentID) {
+    $.ajax({
+        type: "GET",
+        url: "backend/serviceHandler.php",
+        cache: false,
+        data: { function: "loadVotingCounter", param: appointmentID },
+        dataType: "json",
+        success: function (response) {
+            console.log("SUCCESS: Votings werden geladen", appointmentID);
+            console.log(response);
+            $("#appointments").remove('#votingheader');
+            $("#appointments").append("<div><h3 class = 'text-white mt-5' id = 'votingheader'> Votings </h3> </div>");
+            $.each(response, function (i, val) {
+                var optionsnummer = val['optionsnummer'];
+                var voteCount = val['votingCount'];
+                var date = val['date'];
+                var end = val['end'];
+                var begin = val['begin'];
+                $("#appointments").append("<div> <p class = 'text-white'>" + "Für den Termin am " + date + " von " + begin + " bis " + end
+                    + " haben " + "<strong>" + voteCount + "</strong>" + " Benutzer gevotet" + "</p> </div>");
+            });
+        },
+        error: function (response) {
+            console.log("ERROR: Votings werden nicht geladen", appointmentID);
             console.log(response);
         }
     });

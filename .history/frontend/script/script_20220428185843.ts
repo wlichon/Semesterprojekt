@@ -406,8 +406,6 @@ function ajaxLoadOptions(appointmentID : string){
             $("#appointments").append(slidebutton + commentbar);
             $("#lslide").on('click', slidebar);
             loadCommentsAjax(appointmentID);
-            loadVotingCounter(appointmentID);
-
         },
         
         error: function (response){
@@ -445,7 +443,7 @@ function loadCommentsAjax(appointmentID: string) {
                 //console.log(commentid, name, comment);
 
                 $("#appointments").append(
-                "<div> <p class = 'text-white'>" + "<strong>" + "#" + commentid + "</strong>"
+                "<div> <p class = 'text-white'>" + "#" + commentid
                 + " " + name + " schrieb dazu: " +
                 comment + "</p> </div>"
                 );
@@ -461,37 +459,18 @@ function loadCommentsAjax(appointmentID: string) {
     })
 }
 
-function loadVotingCounter(appointmentID: string) {
-    $.ajax({
-        type: "GET",
-        url: "backend/serviceHandler.php",
-        cache: false,
-        data: {function: "loadVotingCounter", param: appointmentID},
-        dataType: "json",
-
-        success: function (response) {
-            console.log("SUCCESS: Votings werden geladen", appointmentID);
-            console.log(response);
-            $("#appointments").remove('#votingheader');
-            $("#appointments").append("<div><h3 class = 'text-white mt-5' id = 'votingheader'> Votings </h3> </div>");
-
-            $.each(response, (i: number,val) =>{
-                var optionsnummer = val['optionsnummer']; 
-                var voteCount = val['votingCount'];
-                var date = val['date'];
-                var end = val['end'];
-                var begin = val['begin'];
-
-                $("#appointments").append(
-                "<div> <p class = 'text-white'>" + "Für den Termin am " + date + " von " + begin + " bis " + end
-                + " haben " + "<strong>" + voteCount + "</strong>" + " Benutzer gevotet" + "</p> </div>"
-                );
-            })
-        },
-
-        error: function (response) {
-            console.log("ERROR: Votings werden nicht geladen", appointmentID);
-            console.log(response);
+function loadVotingCounter($id)
+{
+    $sql = "SELECT * FROM option where fk_a_id=$id";
+    $res = $this->conn->query($sql);
+    if ($res->num_rows > 0) {
+        $array = $res->fetch_all();
+        $data = array();
+        $iterator = 0;
+        foreach ($array as $item) {
+            $data[$iterator] = new Vote($item[1], $item[5]);
+            $iterator++;
         }
-    })
+    }
+    return $data;
 }

@@ -1,8 +1,8 @@
 <?php
-include(__dir__ . "\..\models\optionvote.php");
 include(__dir__ . "\..\models\appointment.php");
 include(__dir__ . "\..\models\option.php");
 include(__dir__ . "\..\models\comment.php");
+include(b"ackend\models\vote.php");
 
 
 class DataHandler
@@ -178,14 +178,14 @@ class DataHandler
 
     public function loadVotingCounter($id)
     {
-        $sql = "SELECT * FROM options where fk_a_id=$id";
+        $sql = "SELECT * FROM option where fk_a_id=$id";
         $res = $this->conn->query($sql);
         if ($res->num_rows > 0) {
             $array = $res->fetch_all();
             $data = array();
             $iterator = 0;
             foreach ($array as $item) {
-                $data[$iterator] = new Vote($item[1], $item[5], $item[2], $item[3], $item[4]);
+                $data[$iterator] = new Vote($item[1], $item[5]);
                 $iterator++;
             }
         }

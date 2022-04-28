@@ -30,9 +30,7 @@ class Logic
             case "getHighestVote":
                 $res = $this->dh->getHighestVote($param);
                 break;
-            case "loadVotingCounter":
-                $res = $this->dh->loadVotingCounter($param);
-                break;
+            case "loadVotingCounter"
             default:
                 $res = null;
                 break;
