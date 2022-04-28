@@ -1,0 +1,4 @@
+1. Etwas überlegen wegen serviceHandler-Logic-DatenbankEintrag Schnittstelle Wie umsetzen? muss über service Handler laufen!
+2. Bootstrap-Bugs fixen -> manchmal slidet die Seite ein Element rein und die anderen erscheinen einfach ohne Animation
+3. komplett alles durchtesten und kontrollieren ob in jeder kombination noch alles funktioniert
+4. Rückkehrbutton bei Formular für Erstellung eines Appointmens erstellen

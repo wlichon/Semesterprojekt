@@ -1,0 +1,6 @@
+
+2. Appointments können gelöscht werden
+3. Tabelle Personen mit Kommentare, PersonID
+4. Etwas überlegen wegen serviceHandler-Logic-DatenbankEintrag Schnittstelle Wie umsetzen?
+5. Design verbessern und Bootstrap-Bugs fixen -> manchmal slidet die Seite ein Element rein und die anderen erscheinen einfach
+6. Formular bei Erstellung von neuen Appointments wird nicht geupdated

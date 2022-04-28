@@ -2,7 +2,7 @@ var months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oc
 var days = ["Mon","Tue","Wed","Thu","Fri","Sat","Sun"];
 
 const slidebutton = "<div class='btn btn-primary col-auto p-1' id='lslide'><i class='bi bi-chevron-left'></i></div>";
-const commentbar = "<div class='row mt-5 comment'><div class='input-group input-group-lg'><span class='input-group-text' id='inputGroup-sizing-lg'>Comment</span><input type='text' id = 'comment' class='form-control' aria-label='Sizing example input' aria-describedby='inputGroup-sizing-lg'> <i class='bi bi-person-circle m-1'></i><input type='text' placeholder='Name' name = 'personname' id = 'personname'> <button class='btn btn-outline-secondary bg-primary text-white' type='submit' name='submitnamecommentcheckbox'>Submit</button></div></div>"
+const commentbar = "<div class='row mt-5 comment'><div class='input-group input-group-lg'><span class='input-group-text' id='inputGroup-sizing-lg'>Comment</span><input type='text' id = 'comment' class='form-control' aria-label='Sizing example input' aria-describedby='inputGroup-sizing-lg'> <span class='input-group-text' id='inputGroup-sizing-lg'>Name</span><input type='text' name = 'personname' id = 'personname'> <button class='btn btn-outline-secondary bg-primary text-white' type='submit' name='submitnamecommentcheckbox'>Submit</button></div></div>"
 
 
 
@@ -11,6 +11,7 @@ $(function() {
     $("#appointments").hide();
     $("#events").hide();
     $("#createappointmentform").hide();
+    $('#commenttitle').hide();
 
    $.ajax({
         type: "GET",
@@ -37,8 +38,15 @@ $(function() {
                 let appointmentID = self.getAttribute("data")!;
                 console.log("das ist die appointmentid außerhalb der funktion:", appointmentID);
                 ajaxLoadOptions(appointmentID);
+                //loadCommentsAjax(appointmentID); // HIERHIERHEHRHEHEHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH
                 setTimeout(() => $("#appointments").show("slide",1000),100);
-                
+                /** 
+                * TODO: hier ajax call mit appointmentId als parameter, gibt rows zurück
+                 *! $("#commenttitle").show("slide", 1000);
+                */
+
+
+
                 var forum2 = $('#checkboxnamecomment');
                // var dirtyFormID = 'checkboxnamecomment';
                 //var resetForm = <HTMLFormElement>document.getElementById(dirtyFormID);
@@ -111,7 +119,7 @@ $(function() {
         
     });
     
-    console.log("hi");
+    
 
     $("#submit").on('click', () => {
        console.log($("#test").prop("checked"));
@@ -127,6 +135,14 @@ $(function() {
 
 
     var frm = $('#createappointmentform');
+    $("#createappointmentform").append(slidebutton);
+    $("#lslide").on('click', function() {
+        $("#createappointmentform").hide("slide", {direction : "left"}, 1000, () =>{
+            $("#appointments").empty().append(optionNameInput);
+            $("#events").show("slide",1000);
+        })
+    });
+
     frm.submit(function (e) {
         e.preventDefault();
         $("createappointment").show();
@@ -182,6 +198,7 @@ $(function() {
                                     var appointmentID = self.getAttribute("data")!;
                                     console.log(appointmentID);
                                     ajaxLoadOptions(appointmentID);
+                                    //loadCommentsAjax(appointmentID); // HIERHIERHEHRHEHEHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH
                                     setTimeout(() => $("#appointments").show("slide",1000),100);
                                     })
                     
@@ -227,6 +244,7 @@ $(function() {
                                     var appointmentID = self.getAttribute("data")!;
                                     console.log(appointmentID);
                                     ajaxLoadOptions(appointmentID);
+                                    //loadCommentsAjax(appointmentID); // HIERHIERHEHRHEHEHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH
                                     setTimeout(() => $("#appointments").show("slide",1000),100);
                                     })
                     
@@ -244,17 +262,13 @@ $(function() {
         });
     });
 
+
 const optionNameInput = '<div class="col-md d-flex justify-content-between" style="flex-direction: column">'+
     '<div class="row h-80">'+
         '<div class="col">'+
            '<h2 class="align-self-center">Options</h2>'+
         '</div>'+
     '</div>'+
-    '<div class="row inputs h-20 align-self-bottom">'+
-        '<div class="col-md">'+
-            '<i class="bi bi-person-circle m-1"></i><input type="text" placeholder="Name">'+
-            '</div>'+
-        '</div>'+
     '</div>'
 
 
@@ -357,22 +371,63 @@ function ajaxLoadOptions(appointmentID : string){
         type: "GET",
         url: "backend/serviceHandler.php",
         cache: false,
-        data: {function: "loadOptions",param: appointmentID},   // für die Funktion loadOptions brauchen wir die jeweilige ID des Meetings das wir zuvor angeklickt haben
+        data: {function: "loadOptions", param: appointmentID},   // für die Funktion loadOptions brauchen wir die jeweilige ID des Meetings das wir zuvor angeklickt haben
         dataType: "json",
         success: function (response) {
-            console.log("success")
+            console.log("ajaxLoadOptionsSuccess")
             loadOptions(response);
-                
             $("#appointments").append(slidebutton + commentbar);
-            $("#lslide").on('click', slidebar)
+            $("#lslide").on('click', slidebar);
+            loadCommentsAjax(appointmentID);
         },
-
+        
         error: function (response){
             console.log("failure 370")
+            console.log("failure")
+        },
+
+        complete: function(response){
+            //loadCommentsAjax(appointmentID);
         }
     })
 }
 
 function reloadAfterDelete(){
 
+}
+
+function loadCommentsAjax(appointmentID: string) {
+    $.ajax({
+        type: "GET",
+        url: "backend/serviceHandler.php",
+        cache: false,
+        data: {function: "loadCommentsAndNames", param: appointmentID},
+        dataType: "json",
+
+        success: function (response) {
+            console.log("SUCCESS: hier kommen die apppointments von", appointmentID);
+            console.log(response);
+            $("#appointments").remove('#commentheader');
+            $("#appointments").append("<div><h3 class = 'text-white mt-5' id = 'commentheader'> Kommentare </h3> </div>");
+            $.each(response, (i: number,val) =>{
+                var commentid = val['commentid']; 
+                var name = val['name'];
+                var comment = val['comment'];
+                console.log(commentid, name, comment);
+
+                $("#appointments").append(
+                "<div> <p class = 'text-white'>" + "#" + commentid
+                + " " + name + " schrieb dazu: " +
+                comment + "</p> </div>"
+                );
+            })
+        },
+
+        error: function (response) {
+            $("#appointments").remove('#commentheader');
+            $("#appointments").append("<div><h3 class = 'text-white mt-5' id = 'commentheader'> Bisher keine Kommentare </h3> </div>");
+            console.log("ERROR: hier kommen die apppointments von", appointmentID);
+            console.log(response);
+        }
+    })
 }

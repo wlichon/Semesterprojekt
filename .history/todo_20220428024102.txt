@@ -1,0 +1,3 @@
+1. Etwas überlegen wegen serviceHandler-Logic-DatenbankEintrag Schnittstelle Wie umsetzen? muss über service Handler laufen!
+2. Design verbessern und Bootstrap-Bugs fixen -> manchmal slidet die Seite ein Element rein und die anderen erscheinen einfach ohne Animation
+3. 
